@@ -10,10 +10,6 @@
       it('should return true if a collection contains a user-specified value', function() {
         expect(_.contains([4, 5, 6], 5)).to.be.true;
       });
-
-      it('should work on objects', function(){
-        expect(_.contains({ a: 4, b: 5, c: 6 }, 5)).to.be.true;
-      });
     });
 
     describe('every', function() {
