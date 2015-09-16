@@ -1,44 +1,66 @@
+// This is the proper way to start a javascript file
 (function() {
+  
+  // This makes the arguments variable behave the way we want it to and a few
+  // other things. For more info: 
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
   'use strict';
 
+  // This allows us to use our "_" anywhere. In a web browser, properties of window
+  // are available everywhere without having to type "window."
   window._ = {};
 
-  // Returns whatever value is passed as the argument. This function doesn't
-  // seem very useful, but remember it--if a function needs to provide an
-  // iterator when the user does not pass one in, this will be handy.
-  _.identity = function(val) {
-      return val;
-  };
-
   /**
-   * COLLECTIONS
-   * ===========
-   *
-   * In this section, we'll have a look at functions that operate on collections
-   * of values; in JavaScript, a 'collection' is something that can contain a
-   * number of values--either an array or an object.
-   *
-   *
-   * IMPORTANT NOTE!
-   * ===========
-   *
-   * The .first function is implemented for you, to help guide you toward success
-   * in your work on the following functions. Whenever you see a portion of the
-   * assignment pre-completed, be sure to read and understanding it fully before
-   * you proceed. Skipping this step will lead to considerably more difficulty
-   * implementing the sections you are responsible for.
+   * START OF OUR LIBRARY!
    */
 
-  // Return an array of the first n elements of an array. If n is undefined,
-  // return just the first element.
-  _.first = function(array, n) {
-    return n === undefined ? array[0] : array.slice(0, n);
+  /** IDENTITY
+   * Arguments:
+   *   1) Anything : x
+   * Objectives:
+   *   1) Returns x unchanged
+   * Examples:
+   *   _.identity(5) === 5
+   *   _.identity({a: "b"}) === {a: "b"}
+   */
+  _.identity = function() {
   };
 
-  // Like first, but for the last elements. If n is undefined, return just the
-  // last element.
-  _.last = function(array, n) {
 
+  /** FIRST
+   * Arguments:
+   *   1) An array : arr
+   *   2) a number : n
+   * Objectives:
+   *   1) If arr is not an array, return []
+   *   2) If n is not given or not a number, return just the first element in arr.
+   *   3) Otherwise, return the first n items of arr
+   * Gotchas:
+   *   1) What if n is negative?
+   *   2) What if n is greater than arr.length?
+   * Examples:
+   *   _.first(["a","b","c"], 2) -> ["a", "b"]
+   *   _.first(["a", "b", "c"], "ponies") -> ["a","b","c"]
+   */
+  _.first = function() {
+  };
+
+  /** LAST (similar to FIRST)
+   * Arguments:
+   *   1) An array : arr
+   *   2) a number : n
+   * Objectives:
+   *   1) If arr is not an array, return []
+   *   2) If n is not given or not a number, return just the last element in arr.
+   *   3) Otherwise, return the last n items of arr
+   * Gotchas:
+   *   1) What if n is negative?
+   *   2) What if n is greater than arr.length?
+    * Examples:
+   *   _.last(["a","b","c"], 2) -> ["b","c"]
+   *   _.last(["a", "b", "c"], "ponies") -> ["a","b","c"]
+   */
+  _.last = function(array, n) {
   };
 
   // Call iterator(value, key, collection) for each element of collection.
