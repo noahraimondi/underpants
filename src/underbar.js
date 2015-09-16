@@ -12,6 +12,7 @@
 
   /**
    * START OF OUR LIBRARY!
+   * Implement each function below it's instructions
    */
 
   /** identity
@@ -42,7 +43,7 @@
    */
 
 
-  /** last (similar to FIRST)
+  /** last
    * Arguments:
    *   1) An array : arr
    *   2) a number : n
@@ -104,121 +105,142 @@
    * Gotchas:
    *   1) What if test returned something other than true or false?
    *   2) What if arr is not an array?
-    * Examples:
+   * Examples:
    *   _.filter([1,2,3,4,5], function(e){return e%2 === 0}) -> [2,4]
    */
 
 
-  // Return all elements of an array that don't pass a truth test.
-  _.reject = function(collection, test) {
-    // TIP: see if you can re-use _.filter() here, without simply
-    // copying code in and modifying it
-
-  };
-
-  // Produce a duplicate-free version of the array.
-  _.uniq = function(array) {
-
-  };
-
-
-  // Return the results of applying an iterator to each element.
-  _.map = function(collection, iterator) {
-    // map() is a useful primitive iteration function that works a lot
-    // like each(), but in addition to running the operation on all
-    // the members, it also maintains an array of results.
-
-  };
-
-  /*
-   * TIP: map is really handy when you want to transform an array of
-   * values into a new array of values. _.pluck() is solved for you
-   * as an example of this.
+  /** reject
+   * Arguments:
+   *   1) An array : arr
+   *   2) a test function : test
+   * Objectives:
+   *   1) call test for each element in arr passing the arguments:
+   *      the element, it's index, arr
+   *   2) return an array of elements for which calling test returned false
+   * Gotchas:
+   *   1) What if test returned something other than true or false?
+   *   2) What if arr is not an array?
+   * Examples:
+   *   _.reject([1,2,3,4,5], function(e){return e%2 === 0}) -> [1,3,5]
+   * Bonus:
+   *   Use _.filter in your implementation
    */
 
-  // Takes an array of objects and returns and array of the values of
-  // a certain property in it. E.g. take an array of people and return
-  // an array of just their ages
-  _.pluck = function(collection, key) {
-    // TIP: map is really handy when you want to transform an array of
-    // values into a new array of values. _.pluck() is solved for you
-    // as an example of this.
-    return _.map(collection, function(item){
-      return item[key];
-    });
-  };
 
-  // Reduces an array or object to a single value by repetitively calling
-  // iterator(accumulator, item) for each item. accumulator should be
-  // the return value of the previous iterator call.
-  //
-  // You can pass in a starting value for the accumulator as the third argument
-  // to reduce. If no starting value is passed, the first element is used as
-  // the accumulator, and is never passed to the iterator. In other words, in
-  // the case where a starting value is not passed, the iterator is not invoked
-  // until the second element, with the first element as it's second argument.
-  //
-  // Example:
-  //   var numbers = [1,2,3];
-  //   var sum = _.reduce(numbers, function(total, number){
-  //     return total + number;
-  //   }, 0); // should be 6
-  //
-  //   var identity = _.reduce([5], function(total, number){
-  //     return total + number * number;
-  //   }); // should be 5, regardless of the iterator function passed in
-  //          No accumulator is given so the first element is used.
-  _.reduce = function(collection, iterator, accumulator) {
-
-  };
-
-  // Determine if the array or object contains a given value (using `===`).
-  _.contains = function(collection, target) {
-    // TIP: Many iteration problems can be most easily expressed in
-    // terms of reduce(). Here's a freebie to demonstrate!
-    return _.reduce(collection, function(wasFound, item) {
-      if (wasFound) {
-        return true;
-      }
-      return item === target;
-    }, false);
-  };
-
-
-  // Determine whether all of the elements match a truth test.
-  _.every = function(collection, iterator) {
-    // TIP: Try re-using reduce() here.
-
-  };
-
-  // Determine whether any of the elements pass a truth test. If no iterator is
-  // provided, provide a default one
-  _.some = function(collection, iterator) {
-    // TIP: There's a very clever way to re-use every() here.
-
-  };
-
-
-  /**
-   * OBJECTS
-   * =======
-   *
-   * In this section, we'll look at a helper for merging objects.
+  /** uniq 
+   * Arguments:
+   *   1) An array : arr
+   * Objectives:
+   *   1) return arr with all duplicates removed
+   * Examples:
+   *   _.uniq([1,2,2,4,5,5,2]) -> [1,2,4,5]
    */
 
-  // Extend a given object with all the properties of the passed in
-  // object(s).
-  //
-  // Example:
-  //   var obj1 = {key1: "something"};
-  //   _.extend(obj1, {
-  //     key2: "something new",
-  //     key3: "something else new"
-  //   }, {
-  //     bla: "even more stuff"
-  //   }); // obj1 now contains key1, key2, key3 and bla
-  _.extend = function(obj) {
 
-  };
+  /** map
+   * Arguments:
+   *   1) An array : arr
+   *   2) a function : func
+   * Objectives:
+   *   1) call func for each element in arr passing the arguments:
+   *      the element
+   *   2) save the return value of each func call in a new array
+   *   3) return the new array
+   * Gotchas:
+   *   1) What if func is not a function?
+   *   2) What if arr is not an array?
+   * Examples:
+   *   _.map([1,2,3,4], function(e){return e * 2}) -> [2,4,6,8]
+   */
 
+
+  /** pluck
+   * Arguments:
+   *   1) An array of objects : arr
+   *   2) A property : prop
+   * Objectives:
+   *   1) Return an array containing the value of prop for every element in arr
+   * Gotchas:
+   *   1) What if prop is not given?
+   *   2) What if arr is not an array?
+   *   3) What if one of the elements doesn't have prop?
+   * Examples:
+   *   _.pluck([{a: "one"}, {a: "two"}], "a") -> ["one", "two"]
+   * Bonus:
+   *   Use _.map in your implementation
+   */
+
+
+  /** reduce
+   * Arguments:
+   *   1) An array : arr
+   *   2) A function : func
+   *   3) A starting point : start
+   * Objectives:
+   *   1) Call func for every element in arr passing the arguments:
+   *       previous result, current element, current element's index
+   *   2) Use the return value of this function as the "previous result"
+   *      for the next iteration
+   *   3) On the very first iteration, use start as the "previous result"
+   *   4) After the last iteration, return the return value of the final func call
+   * Gotchas:
+   *   1) What if no start is given?
+   *   2) What if arr is not an array?
+   * Examples:
+   *   _.reduce([1,2,3], function(prev, curr){ return prev + curr}) -> 6
+   */
+
+
+  /** contains
+   * Arguments:
+   *   1) An array : arr
+   *   2) A value : val
+   * Objectives:
+   *   1) Return true if arr contains val
+   *   2) Return fals otherwise
+   * Gotchas:
+   *   1) did you use === ?
+   *   2) What if arr is not an array?
+   *   3) What if no value is given?
+   * Examples:
+   *   _.contains([1,"two", 3.14], "two") -> true
+   */
+
+
+  /** every
+   * Arguments:
+   *   1) An array : arr
+   *   2) A test function : test
+   * Objectives:
+   *   1) Call test for every element of arr with the paramaters:
+   *      current element
+   *   2) If the return value of calling test for each element is true, return true
+   *   3) If even one of them returns false, return false
+   * Gotchas:
+   *   1) what if test doesn't return true or false
+   * Examples:
+   *   _.every([2,4,6], function(e){return e % 2 === 0}) -> true
+   *   _.every([1,2,3], function(e){return e % 2 === 0}) -> false
+   */
+   
+   
+  /** some
+   * Arguments:
+   *   1) An array : arr
+   *   2) A test function : test
+   * Objectives:
+   *   1) Call test for every element of arr with the paramaters:
+   *      current element
+   *   2) If the return value of calling test is true for at least one element, return true
+   *   3) If it is false for all elements, return false
+   * Gotchas:
+   *   1) what if test doesn't return true or false
+   * Examples:
+   *   _.some([1,3,5], function(e){return e % 2 === 0}) -> false
+   *   _.some([1,2,3], function(e){return e % 2 === 0}) -> true
+   */
+
+
+// This is the proper way to end a javascript library
 }());
