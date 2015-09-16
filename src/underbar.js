@@ -1,4 +1,4 @@
-// This is the proper way to start a javascript file
+// This is the proper way to start a javascript library
 (function() {
   
   // This makes the arguments variable behave the way we want it to and a few
@@ -14,7 +14,7 @@
    * START OF OUR LIBRARY!
    */
 
-  /** IDENTITY
+  /** identity
    * Arguments:
    *   1) Anything : x
    * Objectives:
@@ -23,11 +23,9 @@
    *   _.identity(5) === 5
    *   _.identity({a: "b"}) === {a: "b"}
    */
-  _.identity = function() {
-  };
 
 
-  /** FIRST
+  /** first
    * Arguments:
    *   1) An array : arr
    *   2) a number : n
@@ -42,10 +40,9 @@
    *   _.first(["a","b","c"], 2) -> ["a", "b"]
    *   _.first(["a", "b", "c"], "ponies") -> ["a","b","c"]
    */
-  _.first = function() {
-  };
 
-  /** LAST (similar to FIRST)
+
+  /** last (similar to FIRST)
    * Arguments:
    *   1) An array : arr
    *   2) a number : n
@@ -60,43 +57,57 @@
    *   _.last(["a","b","c"], 2) -> ["b","c"]
    *   _.last(["a", "b", "c"], "ponies") -> ["a","b","c"]
    */
-  _.last = function(array, n) {
-  };
 
-  // Call iterator(value, key, collection) for each element of collection.
-  // Accepts both arrays and objects.
-  //
-  // Note: _.each does not have a return value, but rather simply runs the
-  // iterator function over each item in the input collection.
-  _.each = function(collection, iterator) {
-    if(Array.isArray(collection)){
-    for (var i = 0; i < collection.length; i++) {
-      iterator(collection[i]);
-    };
-  }
-  };
 
-  // Returns the index at which value can be found in the array, or -1 if value
-  // is not present in the array.
-  _.indexOf = function(array, target){
-    // TIP: Here's an example of a function that needs to iterate, which we've
-    // implemented for you. Instead of using a standard `for` loop, though,
-    // it uses the iteration helper `each`, which you will need to write.
-    var result = -1;
+  /** each
+   * Arguments:
+   *   1) A collection : coll
+   *   2) a function : func
+   * Objectives:
+   *   1) if coll is an array, call func once for each element
+   *      with the arguments: 
+   *         the element, it's index, coll
+   *   2) if coll is an object, run func once for each property
+   *      with the arguments:
+   *         the property's value, it's key, coll
+   * Gotchas:
+   *   1) what if func is not a function?
+   *   2) what if coll is not a collection?
+    * Examples:
+   *   _.each(["a","b","c"], function(e,i,a){ console.log(e}); 
+   *      -> should log "a" "b" "c" to the console
+   */
 
-    _.each(array, function(item, index) {
-      if (item === target && result === -1) {
-        result = index;
-      }
-    });
 
-    return result;
-  };
+  /** indexOf
+   * Arguments:
+   *   1) An array : arr
+   *   2) a value : val
+   * Objectives:
+   *   1) Return the index of arr that is the first occurrance of val
+   * Gotchas:
+   *   1) What if arr has multiple occurances of val?
+   *   2) What if val isn't in arr?
+    * Examples:
+   *   _.indexOf(["a","b","c"], "b") -> 1
+   */
 
-  // Return all elements of an array that pass a truth test.
-  _.filter = function(collection, test) {
 
-  };
+  /** filter
+   * Arguments:
+   *   1) An array : arr
+   *   2) a test function : test
+   * Objectives:
+   *   1) call test for each element in arr passing the arguments:
+   *      the element, it's index, arr
+   *   2) return an array of elements for which calling test returned true
+   * Gotchas:
+   *   1) What if test returned something other than true or false?
+   *   2) What if arr is not an array?
+    * Examples:
+   *   _.filter([1,2,3,4,5], function(e){return e%2 === 0}) -> [2,4]
+   */
+
 
   // Return all elements of an array that don't pass a truth test.
   _.reject = function(collection, test) {
