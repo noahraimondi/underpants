@@ -1,5 +1,5 @@
 # Underpants
-In the past exercizes we've been writing a lot of loops over objects and arrays ourselves. Instead of doing that, we are going to write several fuctions to handle the looping for us. These functions are used every day by professional developers and we're well on our way to becoming professional developers!!
+In the past exercises we've been writing a lot of loops over objects and arrays ourselves. Instead of doing that, we are going to write several fuctions to handle the looping for us. These functions are used every day by professional developers and we're well on our way to becoming professional developers!!
 
 This activity is essentially a re-write of [underscore.js](http://underscorejs.org/).
 
