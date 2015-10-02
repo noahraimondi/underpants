@@ -8,6 +8,7 @@
 
   // This allows us to use our "_" anywhere. In a web browser, properties of window
   // are available everywhere without having to type "window."
+  /* global _ */
   window._ = {};
 
   /**
