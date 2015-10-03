@@ -25,7 +25,6 @@
    *   _.identity(5) === 5
    *   _.identity({a: "b"}) === {a: "b"}
    */
-   _.identity = function(x){return x;};
 
 
   /** _.first()
