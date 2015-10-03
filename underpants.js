@@ -16,156 +16,160 @@
    * Implement each function below it's instructions
    */
 
-  /** identity
+  /** _.identity()
    * Arguments:
-   *   1) Anything : x
+   *   1) Anything
    * Objectives:
-   *   1) Returns x unchanged
+   *   1) Returns <anything> unchanged
    * Examples:
    *   _.identity(5) === 5
    *   _.identity({a: "b"}) === {a: "b"}
    */
+   _.identity = function(x){return x;};
 
 
-  /** first
+  /** _.first()
    * Arguments:
-   *   1) An array : arr
-   *   2) a number : n
+   *   1) An array
+   *   2) A number
    * Objectives:
-   *   1) If arr is not an array, return []
-   *   2) If n is not given or not a number, return just the first element in arr.
-   *   3) Otherwise, return the first n items of arr
+   *   1) If <array> is not an array, return []
+   *   2) If <number> is not given or not a number, return just the first element in <array>.
+   *   3) Otherwise, return the first <number> items of <array>
    * Gotchas:
-   *   1) What if n is negative?
-   *   2) What if n is greater than arr.length?
+   *   1) What if <number> is negative?
+   *   2) What if <number> is greater than <array>.length?
    * Examples:
    *   _.first(["a","b","c"], 2) -> ["a", "b"]
    *   _.first(["a", "b", "c"], "ponies") -> ["a","b","c"]
    */
 
 
-  /** last
+  /** _.last()
    * Arguments:
-   *   1) An array : arr
-   *   2) a number : n
+   *   1) An array
+   *   2) A number
    * Objectives:
-   *   1) If arr is not an array, return []
-   *   2) If n is not given or not a number, return just the last element in arr.
-   *   3) Otherwise, return the last n items of arr
+   *   1) If <array> is not an array, return []
+   *   2) If <number> is not given or not a number, return just the last element in <array>.
+   *   3) Otherwise, return the last <number> items of <array>
    * Gotchas:
-   *   1) What if n is negative?
-   *   2) What if n is greater than arr.length?
+   *   1) What if <nubmer> is negative?
+   *   2) What if <number> is greater than <array>.length?
     * Examples:
    *   _.last(["a","b","c"], 2) -> ["b","c"]
    *   _.last(["a", "b", "c"], "ponies") -> ["a","b","c"]
    */
 
 
-  /** each
+  /** _.each()
    * Arguments:
-   *   1) A collection : coll
-   *   2) a function : func
+   *   1) A collection
+   *   2) A function
    * Objectives:
-   *   1) if coll is an array, call func once for each element
+   *   1) if <collection> is an array, call <function> once for each element
    *      with the arguments: 
-   *         the element, it's index, coll
-   *   2) if coll is an object, run func once for each property
+   *         the element, it's index, <collection>
+   *   2) if <collection> is an object, call <function> once for each property
    *      with the arguments:
-   *         the property's value, it's key, coll
+   *         the property's value, it's key, <collection>
    * Gotchas:
-   *   1) what if func is not a function?
-   *   2) what if coll is not a collection?
+   *   1) what if <function> is not a function?
+   *   2) what if <collection> is not a collection?
     * Examples:
    *   _.each(["a","b","c"], function(e,i,a){ console.log(e}); 
    *      -> should log "a" "b" "c" to the console
    */
 
 
-  /** indexOf
+  /** _.indexOf()
    * Arguments:
-   *   1) An array : arr
-   *   2) a value : val
+   *   1) An array
+   *   2) A value
    * Objectives:
-   *   1) Return the index of arr that is the first occurrance of val
+   *   1) Return the index of <array> that is the first occurrance of <value>
+   *   2) Return -1 if <value> is not in <array>
+   *   3) Do not use [].indexOf()!
    * Gotchas:
-   *   1) What if arr has multiple occurances of val?
-   *   2) What if val isn't in arr?
+   *   1) What if <array> has multiple occurances of val?
+   *   2) What if <val> isn't in <array>?
     * Examples:
-   *   _.indexOf(["a","b","c"], "b") -> 1
+   *   _.indexOf(["a","b","c"], "c") -> 2
+   *   _.indexOf(["a","b","c"], "d") -> -1
    */
 
 
-  /** filter
+  /** _.filter()
    * Arguments:
-   *   1) An array : arr
-   *   2) a test function : test
+   *   1) An array
+   *   2) A function
    * Objectives:
-   *   1) call test for each element in arr passing the arguments:
-   *      the element, it's index, arr
-   *   2) return an array of elements for which calling test returned true
+   *   1) call <function> for each element in <array> passing the arguments:
+   *      the element, it's index, <array>
+   *   2) return a new array of elements for which calling <function> returned true
    * Gotchas:
-   *   1) What if test returned something other than true or false?
-   *   2) What if arr is not an array?
+   *   1) What if <function> returned something other than true or false?
+   *   2) What if <array> is not an array?
    * Examples:
-   *   _.filter([1,2,3,4,5], function(e){return e%2 === 0}) -> [2,4]
+   *   _.filter([1,2,3,4,5], function(x){return x%2 === 0}) -> [2,4]
    */
 
 
-  /** reject
+  /** _reject()
    * Arguments:
-   *   1) An array : arr
-   *   2) a test function : test
+   *   1) An array
+   *   2) A function
    * Objectives:
-   *   1) call test for each element in arr passing the arguments:
-   *      the element, it's index, arr
-   *   2) return an array of elements for which calling test returned false
+   *   1) call <function> for each element in <array> passing the arguments:
+   *      the element, it's index, <array>
+   *   2) return a new array of elements for which calling <function> returned false
    * Gotchas:
-   *   1) What if test returned something other than true or false?
-   *   2) What if arr is not an array?
+   *   1) What if <function> returned something other than true or false?
+   *   2) What if <array> is not an array?
    * Examples:
    *   _.reject([1,2,3,4,5], function(e){return e%2 === 0}) -> [1,3,5]
-   * Bonus:
-   *   Use _.filter in your implementation
+   * Extra Credit:
+   *   Use _.filter in your implementation (this is actually pretty easy)
    */
 
 
-  /** uniq 
+  /** _.unique()
    * Arguments:
-   *   1) An array : arr
+   *   1) An array
    * Objectives:
-   *   1) return arr with all duplicates removed
+   *   1) return a new array of all elements from <array> with duplicates removed
    * Examples:
    *   _.uniq([1,2,2,4,5,5,2]) -> [1,2,4,5]
    */
 
 
-  /** map
+  /** _.map()
    * Arguments:
-   *   1) An array : arr
-   *   2) a function : func
+   *   1) An array
+   *   2) a function
    * Objectives:
-   *   1) call func for each element in arr passing the arguments:
+   *   1) call <function> for each element in <array> passing the arguments:
    *      the element
-   *   2) save the return value of each func call in a new array
+   *   2) save the return value of each <function> call in a new array
    *   3) return the new array
    * Gotchas:
-   *   1) What if func is not a function?
-   *   2) What if arr is not an array?
+   *   1) What if <function> is not a function?
+   *   2) What if <array> is not an array?
    * Examples:
    *   _.map([1,2,3,4], function(e){return e * 2}) -> [2,4,6,8]
    */
 
 
-  /** pluck
+  /** _.pluck()
    * Arguments:
-   *   1) An array of objects : arr
-   *   2) A property : prop
+   *   1) An array of objects
+   *   2) A property
    * Objectives:
-   *   1) Return an array containing the value of prop for every element in arr
+   *   1) Return an array containing the value of <property> for every element in <array>
    * Gotchas:
-   *   1) What if prop is not given?
-   *   2) What if arr is not an array?
-   *   3) What if one of the elements doesn't have prop?
+   *   1) What if <property> is not given?
+   *   2) What if <array> is not an array?
+   *   3) What if one of the elements doesn't have <property>?
    * Examples:
    *   _.pluck([{a: "one"}, {a: "two"}], "a") -> ["one", "two"]
    * Bonus:
@@ -173,70 +177,78 @@
    */
 
 
-  /** reduce
+  /** _.reduce()
    * Arguments:
-   *   1) An array : arr
-   *   2) A function : func
-   *   3) A starting point : start
+   *   1) An collection
+   *   2) A function
+   *   3) A seed
    * Objectives:
-   *   1) Call func for every element in arr passing the arguments:
-   *       previous result, current element, current element's index
-   *   2) Use the return value of this function as the "previous result"
+   *   1) Call <function> for every element in <collection> passing the arguments:
+   *       if <collection> is an array:
+   *         previous result, current element, current element's index
+   *       if <collection> is an object
+   *         previous result, current index, current value
+   *   2) Use the return value of <function> as the "previous result"
    *      for the next iteration
-   *   3) On the very first iteration, use start as the "previous result"
-   *   4) After the last iteration, return the return value of the final func call
+   *   3) On the very first iteration, use <seed> as the "previous result"
+   *   4) After the last iteration, return the return value of the final <function> call
    * Gotchas:
-   *   1) What if no start is given?
-   *   2) What if arr is not an array?
+   *   1) What if no <seed> is given?
    * Examples:
    *   _.reduce([1,2,3], function(prev, curr){ return prev + curr}) -> 6
    */
 
 
-  /** contains
+  /** _.contains()
    * Arguments:
-   *   1) An array : arr
-   *   2) A value : val
+   *   1) An array
+   *   2) A value
    * Objectives:
-   *   1) Return true if arr contains val
-   *   2) Return fals otherwise
+   *   1) Return true if <array> contains <value>
+   *   2) Return false otherwise
    * Gotchas:
    *   1) did you use === ?
-   *   2) What if arr is not an array?
-   *   3) What if no value is given?
+   *   2) What if <array> is not an array?
+   *   3) What if no <value> is given?
    * Examples:
    *   _.contains([1,"two", 3.14], "two") -> true
    */
 
 
-  /** every
+  /** _.every()
    * Arguments:
-   *   1) An array : arr
-   *   2) A test function : test
+   *   1) A collection
+   *   2) A function
    * Objectives:
-   *   1) Call test for every element of arr with the paramaters:
-   *      current element
-   *   2) If the return value of calling test for each element is true, return true
+   *   1) Call <function> for every element of <collection> with the paramaters:
+   *      if <collection> is an array:
+   *          current element, it's index, <collection>
+   *      if <collection> is an object:
+   *          current value, current key, <collection>
+   *   2) If the return value of calling <function> for every element is true, return true
    *   3) If even one of them returns false, return false
    * Gotchas:
-   *   1) what if test doesn't return true or false
+   *   1) what if <function> doesn't return a boolean
    * Examples:
    *   _.every([2,4,6], function(e){return e % 2 === 0}) -> true
    *   _.every([1,2,3], function(e){return e % 2 === 0}) -> false
    */
    
    
-  /** some
+  /** _.some()
    * Arguments:
-   *   1) An array : arr
-   *   2) A test function : test
+   *   1) A collection
+   *   2) A function
    * Objectives:
-   *   1) Call test for every element of arr with the paramaters:
-   *      current element
-   *   2) If the return value of calling test is true for at least one element, return true
+   *   1) Call <function> for every element of <collection> with the paramaters:
+   *       if <collection> is an array:
+   *        current element, it's index, <collection>
+   *       if <collection> is an object:
+   *        current value, current key, <collection>
+   *   2) If the return value of calling <function> is true for at least one element, return true
    *   3) If it is false for all elements, return false
    * Gotchas:
-   *   1) what if test doesn't return true or false
+   *   1) what if <function> doesn't return a boolean
    * Examples:
    *   _.some([1,3,5], function(e){return e % 2 === 0}) -> false
    *   _.some([1,2,3], function(e){return e % 2 === 0}) -> true
