@@ -1,12 +1,15 @@
+/*global describe */
+/*global expect */
+/*global _ */
 (function() {
   'use strict';
 
   describe('Part I', function() {
 
-    describe('identity', function() {
+    describe('_.identity()', function() {
       var uniqueObject = {};
 
-      it('should return whatever value is passed into it', function() {
+      it('Should return whatever value is passed into it', function() {
         expect(_.identity(1)).to.equal(1);
         expect(_.identity('string')).to.equal('string');
         expect(_.identity(false)).to.be.false;
@@ -14,49 +17,49 @@
       });
     });
 
-    describe('first', function() {
-      it('should be able to pull out the first element of an array', function() {
+    describe('_.first()', function() {
+      it('Should be able to return the first element of an array', function() {
         expect(_.first([1,2,3])).to.equal(1);
       });
 
-      it('should accept an index argument', function() {
+      it('Should accept a length argument', function() {
         expect(_.first([1,2,3], 2)).to.eql([1, 2]);
       });
 
-      it('should return empty array if zero is passed in as the index', function() {
+      it('Should return empty array if the length argument is zero', function() {
         expect(_.first([1,2,3], 0)).to.eql([]);
       });
 
-      it('should return all the array\'s elements if the index argument is larger than the length of the array', function() {
+      it('Should return just the array\'s elements if the length argument is greater than the array\'s length', function() {
         expect(_.first([1,2,3], 5)).to.eql([1, 2, 3]);
       });
     });
 
-    describe('last', function() {
-      it('should pull the last element from an array', function() {
+    describe('_.last()', function() {
+      it('Should return the last element of an array', function() {
         expect(_.last([1,2,3])).to.equal(3);
       });
 
-      it('should accept an index argument', function() {
+      it('Should accept a length argument', function() {
         expect(_.last([1,2,3], 2)).to.eql([2, 3]);
       });
 
-      it('should return empty array if zero is passed in as the index', function() {
+      it('Should return empty array if the length argument is zero', function() {
         expect(_.last([1,2,3], 0)).to.eql([]);
       });
 
-      it('should return all the array\'s elements if the index argument is larger than the length of the array', function() {
+      it('Should return just the array\'s elements if the length argument is larger than array\'s length', function() {
         expect(_.last([1,2,3], 5)).to.eql([1, 2, 3]);
       });
     });
 
-    describe('each', function() {
-      it('should iterate over arrays, providing access to the element, index, and array itself', function() {
+    describe('_.each()', function() {
+      it('Should iterate over arrays, providing access to the element, index, and array itself', function() {
         var animals = ['ant', 'bat', 'cat'];
         var iterationInputs = [];
 
-        _.each(animals, function(animal, index, list) {
-          iterationInputs.push([animal, index, list]);
+        _.each(animals, function(element, index, array) {
+          iterationInputs.push([element, index, array]);
         });
 
         expect(iterationInputs).to.eql([
@@ -66,14 +69,14 @@
         ]);
       });
 
-      it('should only iterate over the array elements, not properties of the array', function() {
+      it('Should only iterate over the array elements, not properties of the array', function() {
         var animals = ['ant', 'bat', 'cat'];
         var iterationInputs = [];
 
         animals.shouldBeIgnored = 'Ignore me!';
 
-        _.each(animals, function(animal, index, list) {
-          iterationInputs.push([animal, index, list]);
+        _.each(animals, function(element, index, array) {
+          iterationInputs.push([element, index, array]);
         });
 
         expect(iterationInputs).to.eql([
@@ -83,12 +86,12 @@
         ]);
       });
 
-      it('should iterate over objects, providing access to the element, index, and object itself', function() {
+      it('Should iterate over objects, providing access to the value, key, and object itself', function() {
         var animals = { a: 'ant', b: 'bat', c: 'cat' };
         var iterationInputs = [];
 
-        _.each(animals, function(animal, key, object) {
-          iterationInputs.push([animal, key, object]);
+        _.each(animals, function(value, key, object) {
+          iterationInputs.push([value, key, object]);
         });
 
         expect(iterationInputs).to.eql([
@@ -99,48 +102,50 @@
       });
     });
 
-    describe('indexOf', function() {
-      it('should find 40 in the list', function() {
+    describe('_.indexOf()', function() {
+      it('Should return the correct index of a value', function() {
         var numbers = [10, 20, 30, 40, 50];
 
         expect(_.indexOf(numbers, 40)).to.equal(3);
       });
 
-      it('should be able to compute indexOf even when the native function is undefined', function() {
+      it('Should not rely on built in [].indexOf()', function() {
         var numbers = [10, 20, 30];
-
+        var stashed = Array.prototype.indexOf;
+        delete Array.prototype.indexOf;
         expect(_.indexOf(numbers, 20)).to.equal(1);
+        Array.prototype.indexOf = stashed;
       });
 
-      it('returns -1 when the target cannot be found not in the list', function() {
+      it('Should return -1 when the value is not in the array', function() {
         var numbers = [10, 20, 30, 40, 50];
 
         expect(_.indexOf(numbers, 35)).to.equal(-1);
       });
 
-      it('returns the first index that the target can be found at when there are multiple matches', function() {
-        var numbers = [1, 40, 40, 40, 40, 40, 40, 40, 50, 60, 70];
+      it('Should return the 1st index of a value even if there are multiples', function() {
+        var numbers = [1, 40, 40, 40, 40, 50, 40, 40, 40, 50, 60, 70];
 
         expect(_.indexOf(numbers, 40)).to.equal(1);
       });
     });
 
-    describe('filter', function() {
-      it('should return all even numbers in an array', function() {
+    describe('_.filter()', function() {
+      it('should be able to filter an array', function() {
         var isEven = function(num) { return num % 2 === 0; };
         var evens = _.filter([1, 2, 3, 4, 5, 6], isEven);
 
         expect(evens).to.eql([2, 4, 6]);
       });
 
-      it('should return all odd numbers in an array', function() {
+      it('should still be able to filter an array', function() {
         var isOdd = function(num) { return num % 2 !== 0; };
         var odds = _.filter([1, 2, 3, 4, 5, 6], isOdd);
 
         expect(odds).to.eql([1, 3, 5]);
       });
 
-      it('should produce a brand new array instead of modifying the input array', function() {
+      it('should not modify the input array', function() {
         var isOdd = function(num) { return num % 2 !== 0; };
         var numbers = [1, 2, 3, 4, 5, 6];
         var evens = _.filter(numbers, isOdd);
@@ -149,22 +154,22 @@
       });
     });
 
-    describe('reject', function() {
-      it('should reject all even numbers', function() {
+    describe('_.reject()', function() {
+      it('should be able to reject values from an array', function() {
         var isEven = function(num) { return num % 2 === 0; };
         var odds = _.reject([1, 2, 3, 4, 5, 6], isEven);
 
         expect(odds).to.eql([1, 3, 5]);
       });
 
-      it('should reject all odd numbers', function() {
+      it('should still be able to reject values from an array', function() {
         var isOdd = function(num) { return num % 2 !== 0; };
         var evens = _.reject([1, 2, 3, 4, 5, 6], isOdd);
 
         expect(evens).to.eql([2, 4, 6]);
       });
 
-      it('should produce a brand new array instead of modifying the input array', function() {
+      it('should not modify the input array', function() {
         var isOdd = function(num) { return num % 2 !== 0; };
         var numbers = [1, 2, 3, 4, 5, 6];
         var evens = _.reject(numbers, isOdd);
@@ -173,21 +178,21 @@
       });
     });
 
-    describe('uniq', function() {
-      it('should return all unique values contained in an unsorted array', function() {
+    describe('_.unique()', function() {
+      it('should return all unique values in an unsorted array', function() {
         var numbers = [1, 2, 1, 3, 1, 4];
 
         expect(_.uniq(numbers)).to.eql([1, 2, 3, 4]);
       });
 
-      it('should handle iterators that work with a sorted array', function() {
+      it('should return all unique values in a sorted array', function() {
         var iterator = function(value) { return value + 1; };
         var numbers = [1, 2, 2, 3, 4, 4];
 
         expect(_.uniq(numbers, true, iterator)).to.eql([1, 2, 3, 4]);
       });
 
-      it('should produce a brand new array instead of modifying the input array', function() {
+      it('should not modify the input array', function() {
         var numbers = [1, 2, 1, 3, 1, 4];
         var uniqueNumbers = _.uniq(numbers);
 
@@ -265,6 +270,104 @@
         expect(total).to.equal(11);
       });
 
+    });
+    
+    describe('contains', function() {
+      it('should return false if a collection does not contain a user-specified value', function() {
+        expect(_.contains([4, 5, 6], 2)).to.be.false;
+      });
+
+      it('should return true if a collection contains a user-specified value', function() {
+        expect(_.contains([4, 5, 6], 5)).to.be.true;
+      });
+    });
+
+    describe('every', function() {
+      var isEven = function(num) {
+        return num % 2 === 0;
+      };
+
+      it('passes by default for an empty collection', function() {
+        expect(_.every([], _.identity)).to.be.true;
+      });
+
+      it('passes for a collection of all-truthy results', function() {
+        expect(_.every([true, {}, 1], _.identity)).to.be.true;
+      });
+
+      it('fails for a collection of all-falsy results', function() {
+        expect(_.every([null, 0, undefined], _.identity)).to.be.false;
+      });
+
+      it('fails for a collection containing mixed falsy and truthy results', function() {
+        expect(_.every([true, false, 1], _.identity)).to.be.false;
+        expect(_.every([1, undefined, true], _.identity)).to.be.false;
+      });
+
+      it('should work when provided a collection containing undefined values', function() {
+        expect(_.every([undefined, undefined, undefined], _.identity)).to.be.false;
+      });
+
+      it('should cast the result to a boolean', function() {
+        expect(_.every([1], _.identity)).to.be.true;
+        expect(_.every([0], _.identity)).to.be.false;
+      });
+
+      it('should handle callbacks that manipulate the input', function() {
+        expect(_.every([0, 10, 28], isEven)).to.be.true;
+        expect(_.every([0, 11, 28], isEven)).to.be.false;
+      });
+
+      it('should work when no callback is provided', function() {
+        expect(_.every([true, true, true])).to.be.true;
+        expect(_.every([true, true, false])).to.be.false;
+        expect(_.every([false, false, false])).to.be.false;
+      });
+    });
+
+    describe('some', function() {
+      var isEven = function(number){
+        return number % 2 === 0;
+      };
+
+      it('should fail by default for an empty collection', function() {
+        expect(_.some([])).to.be.false;
+      });
+
+      it('should pass for a collection of all-truthy results', function() {
+        expect(_.some([true, {}, 1], _.identity)).to.be.true;
+      });
+
+      it('should fail for a collection of all-falsy results', function() {
+        expect(_.some([null, 0, undefined], _.identity)).to.be.false;
+      });
+
+      it('should pass for a collection containing mixed falsy and truthy results', function() {
+        expect(_.some([true, false, 1], _.identity)).to.be.true;
+      });
+
+      it('should pass for a set containing one truthy value that is a string', function() {
+        expect(_.some([null, 0, 'yes', false], _.identity)).to.be.true;
+      });
+
+      it('should fail for a set containing no matching values', function() {
+        expect(_.some([1, 11, 29], isEven)).to.be.false;
+      });
+
+      it('should pass for a collection containing one matching value', function() {
+        expect(_.some([1, 10, 29], isEven)).to.be.true;
+      });
+
+      it('should cast the result to a boolean', function() {
+        expect(_.some([1], _.identity)).to.be.true;
+        expect(_.some([0], _.identity)).to.be.false;
+      });
+
+      it('should work when no callback is provided', function() {
+        expect(_.some([true, true, true])).to.be.true;
+        expect(_.some([true, true, false])).to.be.true;
+        expect(_.some([false, false, false])).to.be.false;
+      });
     });
   });
 }());
