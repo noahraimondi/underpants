@@ -1,15 +1,17 @@
 # Underpants
-In the past exercises we've been writing a lot of loops over objects and arrays ourselves. Instead of doing that, we are going to write several fuctions to handle the looping for us. These functions are used every day by professional developers and we're well on our way to becoming professional developers!!
-
 This activity is essentially a re-write of [underscore.js](http://underscorejs.org/).
+
+## Why?
+In the past exercises we've been writing a lot of loops over objects and arrays ourselves. Instead of doing that, we are going to write several fuctions to handle the looping for us. These functions are used every day by professional developers and we're well on our way to becoming professional developers!!
 
 This means that if we're confused about how a function should work, we can check the underscore.js documentation linked above for help. 
 
 ## Instructions
- - Open up index.html in a web browser
- - Notice that all the tests are failing :)
- - Open up underpants.js in a text editor and follow the instructions
+ - Open up underpants.html in a web browser.
+ - Notice that all the tests are failing. :)
+ - Open up underpants.js in a text editor and follow the instructions.
  - Make all the test pass!!
+ - Open underpants.html in a text editor to view the code that runs the tests.
 
 ## Links and Resources
 
@@ -33,40 +35,24 @@ Some quick notes that may come in handy:
       not support most array functions (such as `slice` or `push`). You can read
       more about this [here](http://www.sitepoint.com/arguments-a-javascript-oddity/).
 
-#### Part I:
-- [ ] identity
-- [ ] *first*
-- [ ] last
-- [ ] each
-- [ ] *indexOf*
-- [ ] filter
-- [ ] reject
-- [ ] uniq
-- [ ] map
-- [ ] *pluck*
-- [ ] reduce
-- [ ] *contains*
-- [ ] every
-- [ ] some
-
 ### Extra Credit:
 See Instructor for instructions.
-- [ ] extend
-- [ ] defaults
-- [ ] *once*
-- [ ] memoize
-- [ ] delay
-- [ ] shuffle
+- defaults
+- *once*
+- memoize
+- delay
+- shuffle
 
 ### Double Extra Credit:
 See Instructor for instructions.
-- [ ] invoke
-- [ ] sortBy
-- [ ] zip
-- [ ] flatten
-- [ ] intersection
-- [ ] difference
-- [ ] throttle
+- once
+- invoke
+- sortBy
+- zip
+- flatten
+- intersection
+- difference
+- throttle
 
 **Note:** Some browsers provide built-in functions--including `forEach`, `map`,
 `reduce` and `filter`--that replicate the functionality of some of the functions
