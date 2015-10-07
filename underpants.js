@@ -203,8 +203,6 @@ window._ = {};
 * Objectives:
 *   1) Return an array containing the value of <property> for every element in <array>
 *   2) You must use _.map() in your implementation.
-* Gotchas:
-*   3) What if one of the elements doesn't have <property>?
 * Examples:
 *   _.pluck([{a: "one"}, {a: "two"}], "a") -> ["one", "two"]
 */
