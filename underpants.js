@@ -292,14 +292,15 @@ window._ = {};
 * Arguments:
 *   1) An Object
 *   2) An Object
+*   ...Possibly more objects
 * Objectives:
 *   1) Copy properties from <object 2> to <object 1>
-*   2) Do not overwrite properties that alread exist in <object 1>
-*   3) Do this using side effects, no return value
+*   2) If more objects are passed in, copy their properties to <object 1> as well, in the order they are passed in.
+*   3) Return the update <object 1>
 * Examples:
 *   var data = {a:"one"};
 *   _.extend(data, {b:"two"}); -> data now equals {a:"one",b:"two"}
-*   _.extend(data, {a:"two"}); -> data now equals {a:"one"}
+*   _.extend(data, {a:"two"}); -> data now equals {a:"two"}
 */
 
 
