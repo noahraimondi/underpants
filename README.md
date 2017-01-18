@@ -4,10 +4,10 @@ This activity is essentially a re-write of [underscore.js](http://underscorejs.o
 ## Why?
 In the past exercises we've been writing a lot of loops over objects and arrays ourselves. Instead of doing that, we are going to write several fuctions to handle the looping for us. These functions are used every day by professional developers and we're well on our way to becoming professional developers!!
 
-This means that if we're confused about how a function should work, we can check the underscore.js documentation linked above for help. 
+This means that if we're confused about how a function should work, we can check the underscore.js documentation linked above for help.
 
 ## Instructions
- - Open up underpants.html in a web browser.
+ - Open up index.html in a web browser.
  - Notice that all the tests are failing. :)
  - Open up underpants.js in a text editor and follow the instructions.
  - Make all the test pass!!
@@ -57,4 +57,3 @@ See Instructor for instructions.
 **Note:** Some browsers provide built-in functions--including `forEach`, `map`,
 `reduce` and `filter`--that replicate the functionality of some of the functions
 you will implement. Don't use them to implement your functions.
-

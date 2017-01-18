@@ -1,8 +1,8 @@
 // This is the proper way to start a javascript library
 (function() {
-  
+
 // This makes the arguments variable behave the way we want it to and a few
-// other things. For more info: 
+// other things. For more info:
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
 'use strict';
 
@@ -32,7 +32,7 @@ window._ = {};
 *   1) Anything
 * Objectives:
 *   1) Return the type of <anything> as a string
-*       Types are one of: 
+*       Types are one of:
 *          - "string"
 *          - "array"
 *          - "object"
@@ -89,13 +89,13 @@ window._ = {};
 *   2) A function
 * Objectives:
 *   1) if <collection> is an array, call <function> once for each element
-*      with the arguments: 
+*      with the arguments:
 *         the element, it's index, <collection>
 *   2) if <collection> is an object, call <function> once for each property
 *      with the arguments:
 *         the property's value, it's key, <collection>
 * Examples:
-*   _.each(["a","b","c"], function(e,i,a){ console.log(e)}); 
+*   _.each(["a","b","c"], function(e,i,a){ console.log(e)});
 *      -> should log "a" "b" "c" to the console
 */
 
@@ -284,7 +284,7 @@ window._ = {};
 * Gotchas:
 *   1) What if <seed> is not given?
 * Examples:
-*   _.reduce([1,2,3], function(previousValue, currentValue, currentIndex){ return previousValue + currentValue }) -> 6
+*   _.reduce([1,2,3], function(previousSum, currentValue, currentIndex){ return previousSum + currentValue }, 0) -> 6
 */
 
 
