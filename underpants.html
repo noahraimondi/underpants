@@ -181,7 +181,7 @@ QUnit.test("_.reduce()", function(assert){
     }, 10), 116, "Should work with an array and a seed");
     assert.strictEqual(_.reduce(inputArray, function(memo, element, i){
         return memo * element * (i+1);
-    }), 5760000, "Should work whithout a seed");
+    }), 5760000, "Should work without a seed");
     assert.strictEqual(_.reduce(inputArray, function(memo, element, i){
         return memo * element * (i+1);
     }, 0), 0, "Should work when seed is falsy");

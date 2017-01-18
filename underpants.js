@@ -284,7 +284,7 @@ window._ = {};
 * Gotchas:
 *   1) What if <seed> is not given?
 * Examples:
-*   _.reduce([1,2,3], function(prev, curr){ return prev + curr}) -> 6
+*   _.reduce([1,2,3], function(previousValue, currentValue, currentIndex){ return previousValue + currentValue }) -> 6
 */
 
 
