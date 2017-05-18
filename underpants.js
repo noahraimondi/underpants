@@ -1,5 +1,5 @@
 // This is the proper way to start a javascript library
-(function() {
+// (function() {
 
 // This makes the arguments variable behave the way we want it to and a few
 // other things. For more info:
@@ -7,9 +7,9 @@
 'use strict';
 
 // This allows us to use our "_" anywhere. In a web browser, properties of window
-// are available everywhere without having to type "window."
+// are available everywhere without having to type ""
 /* global _ */
-window._ = {};
+const _ = {};
 
 /**
 * START OF OUR LIBRARY!
@@ -60,9 +60,9 @@ window._ = {};
 *   1) What if <number> is negative?
 *   2) What if <number> is greater than <array>.length?
 * Examples:
-*   _.first(["a","b","c"], 1) -> "a"
+*   _.first(["a","b","c"], 1) -> ["a"]
 *   _.first(["a","b","c"], 2) -> ["a", "b"]
-*   _.first(["a", "b", "c"], "ponies") -> ["a","b","c"]
+*   _.first(["a", "b", "c"], "ponies") -> "a"
 */
 
 
@@ -79,7 +79,8 @@ window._ = {};
 *   2) What if <number> is greater than <array>.length?
 * Examples:
 *   _.last(["a","b","c"], 2) -> ["b","c"]
-*   _.last(["a", "b", "c"], "ponies") -> ["a","b","c"]
+*   _.last(["a","b","c"], 5) -> ["a", "b","c"]
+*   _.last(["a", "b", "c"], "ponies") -> "c"
 */
 
 
@@ -302,7 +303,42 @@ window._ = {};
 *   _.extend(data, {b:"two"}); -> data now equals {a:"one",b:"two"}
 *   _.extend(data, {a:"two"}); -> data now equals {a:"two"}
 */
-
+_.extend = function(obj) {
+    // arguments[i] THIS IS HOW YOU DO IT WITH ARGUMENTS OR W/E
+    var args = Array.prototype.slice.call(arguments);
+    for(var i = 0; i < args.length; i++) {
+        for(var key in args[i]) {
+            args[0][key] = args[i][key];
+        }
+    }
+    return arguments[0]
+}
 
 // This is the proper way to end a javascript library
-}());
+// }());
+
+//////////////////////////////////////////////////////////////////////
+// DON'T REMOVE THIS CODE ////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+
+if((typeof process !== 'undefined') &&
+   (typeof process.versions.node !== 'undefined')) {
+    // here, export any references you need for tests //
+    module.exports.identity = _.identity;
+    module.exports.typeOf = _.typeOf;
+    module.exports.first = _.first;
+    module.exports.last = _.last;
+    module.exports.each = _.each;
+    module.exports.indexOf = _.indexOf;
+    module.exports.filter = _.filter;
+    module.exports.reject = _.reject;
+    module.exports.partition = _.partition;
+    module.exports.unique = _.unique;
+    module.exports.map = _.map;
+    module.exports.pluck = _.pluck;
+    module.exports.contains = _.contains;
+    module.exports.every = _.every;
+    module.exports.some = _.some;
+    module.exports.reduce = _.reduce;
+    module.exports.extend = _.extend;
+}
