@@ -7,7 +7,7 @@
 'use strict';
 
 // This allows us to use our "_" anywhere. In a web browser, properties of window
-// are available everywhere without having to type ""
+// are available everywhere without having to type "window."
 /* global _ */
 const _ = {};
 
@@ -25,7 +25,9 @@ const _ = {};
 *   _.identity(5) === 5
 *   _.identity({a: "b"}) === {a: "b"}
 */
-
+_.identity = function(i) {
+    return i;
+}
 
 /** _.typeOf()
 * Arguments:
@@ -46,7 +48,27 @@ const _ = {};
 * _.typeOf("javascript") -> "string"
 * _.typeOf([1,2,3]) -> "array"
 */
-
+_.typeOf = function(i) {
+    if(Array.isArray(i)) {
+        return "array";
+    } else if(i instanceof Date) {
+        return "date";
+    } else if(i === null) {
+        return "null";
+    } else if(typeof i === "object") {
+        return "object";
+    } else if(typeof i === "string") {
+        return "string";
+    } else if(typeof i === "number") {
+        return "number";
+    } else if(typeof i === "boolean") {
+        return "boolean";
+    } else if(typeof i === "function") {
+        return "function";
+    } else {
+        return "undefined";
+    }
+}
 
 /** _.first()
 * Arguments:
@@ -64,7 +86,22 @@ const _ = {};
 *   _.first(["a","b","c"], 2) -> ["a", "b"]
 *   _.first(["a", "b", "c"], "ponies") -> "a"
 */
-
+_.first = function(arr, num) {
+    if (Array.isArray(arr) !== true) {
+        return [];
+    } else if (isNaN(num) || num === "") {
+        return arr[0];
+    } else if(num > arr.length) {
+        return arr;
+    }
+    else {
+        var arr2 = [];
+        for(var i = 0; i < num; i++) {
+        arr2.push(arr[i])
+        }
+        return arr2;
+    }
+}
 
 /** _.last()
 * Arguments:
@@ -82,6 +119,22 @@ const _ = {};
 *   _.last(["a","b","c"], 5) -> ["a", "b","c"]
 *   _.last(["a", "b", "c"], "ponies") -> "c"
 */
+_.last = function(arr, num) {
+    if (Array.isArray(arr) !== true) {
+        return [];
+    } else if (isNaN(num) || num === "") {
+        return arr[arr.length - 1];
+    } else if(num > arr.length) {
+        return arr;
+    }
+    else {
+        var arr2 = [];
+        for(var i = arr.length - num; i < arr.length; i++) {
+        arr2.push(arr[i]);
+        }
+        return arr2;
+    }
+}
 
 
 /** _.each()
@@ -99,7 +152,17 @@ const _ = {};
 *   _.each(["a","b","c"], function(e,i,a){ console.log(e)});
 *      -> should log "a" "b" "c" to the console
 */
-
+_.each = function(coll, func) {
+    if(Array.isArray(coll)) {
+        for(var i = 0; i < coll.length; i++) {
+            func(coll[i], i, coll);
+        }
+    } else if (typeof coll === "object") {
+        for(var key in coll) {
+            func(coll[key], key, coll);
+        }
+    }
+}
 
 /** _.indexOf()
 * Arguments:
@@ -116,7 +179,14 @@ const _ = {};
 *   _.indexOf(["a","b","c"], "c") -> 2
 *   _.indexOf(["a","b","c"], "d") -> -1
 */
-
+_.indexOf = function(arr, val) {
+    for(var i = 0; i < arr.length; i++) {
+        if(arr[i] === val) {
+            return i;
+        }
+    }
+    return -1
+}
 
 /** _.filter()
 * Arguments:
@@ -133,8 +203,15 @@ const _ = {};
 * Extra Credit:
 *   use _.each in your implementation
 */
-
-
+_.filter = function(arr, test) {
+    var results = [];
+    _.each (arr, function(val,index,array) {
+            if(test(val, index, array)){
+                results.push(val);
+            }
+        });
+    return results;
+    }
 /** _.reject()
 * Arguments:
 *   1) An array
@@ -147,8 +224,11 @@ const _ = {};
 * Examples:
 *   _.reject([1,2,3,4,5], function(e){return e%2 === 0}) -> [1,3,5]
 */
-
-
+_.reject = function(arr, test) {
+    return _.filter(arr, function(val,index,array) {
+        return !test(val,index,array);
+    })
+}
 /** _.partition()
 * Arguments:
 *   1) An array
@@ -167,8 +247,9 @@ const _ = {};
 *   }); -> [[2,4],[1,3,5]]
 }
 */
-
-
+_.partition = function(arr, test) {
+    return [_.filter(arr, test), _.reject(arr, test)]
+}
 /** _.unique()
 * Arguments:
 *   1) An array
@@ -178,7 +259,15 @@ const _ = {};
 * Examples:
 *   _.unique([1,2,2,4,5,6,5,2]) -> [1,2,4,5,6]
 */
-
+_.unique = function(arr) {
+    var newArr = [];
+    _.each(arr, function(val,index,coll) {
+        if(_.indexOf(newArr,val) === -1) {
+            newArr.push(coll[index]);
+        }
+    });
+    return newArr;
+};
 
 /** _.map()
 * Arguments:
@@ -195,7 +284,13 @@ const _ = {};
 * Examples:
 *   _.map([1,2,3,4], function(e){return e * 2}) -> [2,4,6,8]
 */
-
+_.map = function(coll, func) {
+    let arr = [];
+    _.each(coll, function(val,index,array) {
+        arr.push(func(val,index,array));
+    });
+    return arr;
+};
 
 /** _.pluck()
 * Arguments:
@@ -207,7 +302,11 @@ const _ = {};
 * Examples:
 *   _.pluck([{a: "one"}, {a: "two"}], "a") -> ["one", "two"]
 */
-
+_.pluck = function(arr, key) {
+    return _.map(arr, function(val,index,array) {
+        return array[index][key];
+    });
+};
 
 /** _.contains()
 * Arguments:
@@ -223,7 +322,9 @@ const _ = {};
 * Examples:
 *   _.contains([1,"two", 3.14], "two") -> true
 */
-
+_.contains = function(arr, val) {
+    return _.indexOf(arr, val) != -1 ? true : false;
+};
 
 /** _.every()
 * Arguments:
@@ -245,7 +346,17 @@ const _ = {};
 *   _.every([2,4,6], function(e){return e % 2 === 0}) -> true
 *   _.every([1,2,3], function(e){return e % 2 === 0}) -> false
 */
-
+_.every = function(collection, func) {
+    let arrr = _.map(collection, function(e,i,a) {return Boolean(e)})
+    if(func === undefined ) {
+        if(_.contains(arrr, false)) {return false}
+        return true
+    }
+    // if(func === undefined && _.contains(arrr, false)) {return false;} // DOESN'T WORK because the lower array won't work for function being undefined but values being truthy
+    let arr = _.map(collection, function(e,i,a) {return func(e,i,a) ? true: false;})
+    if(_.contains(arr, false)) {return false;}
+    return true;
+}
 
 /** _.some()
 * Arguments:
@@ -267,7 +378,17 @@ const _ = {};
 *   _.some([1,3,5], function(e){return e % 2 === 0}) -> false
 *   _.some([1,2,3], function(e){return e % 2 === 0}) -> true
 */
-
+_.some = function(coll, func) {
+    let valueBool = _.map(coll, function(e,i,a) {return Boolean(e)})
+    if(func === undefined) {
+        if(_.contains(coll, true)) return true;
+        return false;
+    }
+    // if(func === undefined) {_.contains(coll, true) ? true : false;}
+    let valueFunc = _.map(coll, function(e,i,a) {return func(e,i,a) ? true : false;})
+    if(_.contains(valueFunc, true)) return true;
+    return false;
+}
 
 /** _.reduce()
 * Arguments:
@@ -285,10 +406,31 @@ const _ = {};
 * Gotchas:
 *   1) What if <seed> is not given?
 * Examples:
-*   _.reduce([1,2,3], function(previousSum, currentValue, currentIndex){ return previousSum + currentValue }, 0) -> 6
+*   _.reduce([1,2,3], function(prev, curr){ return prev + curr}) -> 6
 */
-
-
+_.reduce = function(arr, func, seed) {
+    // console.log("BEGIN BEGIN BEGIN BEGIN BEGIN BEGIN , arr is " + arr);
+    // console.log("the func is \n" + func)
+    // console.log(seed + " is the seed")
+    if(seed === undefined) {
+        let prev = arr[0];
+        for(var i = 1; i < arr.length; i++) {
+        // console.log("index " + i + " is " + arr[i])
+        // console.log("prev is " + prev)
+        prev = func(prev, arr[i], i)
+        // console.log("prev is now " + prev)
+        }
+        return prev
+    }
+    let prev = seed;
+        for(var i = 0; i < arr.length; i++) {
+            // console.log("index is " + i)
+            // console.log("prev is " + prev)
+            prev = func(prev, arr[i], i)
+            // console.log("prev is now " + prev)
+        }
+    return prev
+}
 /** _.extend()
 * Arguments:
 *   1) An Object
@@ -324,6 +466,7 @@ _.extend = function(obj) {
 if((typeof process !== 'undefined') &&
    (typeof process.versions.node !== 'undefined')) {
     // here, export any references you need for tests //
+    // module.exports._ = _;
     module.exports.identity = _.identity;
     module.exports.typeOf = _.typeOf;
     module.exports.first = _.first;
