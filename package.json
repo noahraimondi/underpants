@@ -7,7 +7,6 @@
     "test": "test"
   },
   "scripts": {
-    "test2": "istanbul cover _mocha -- test/ -R json",
     "test": "mocha ./test/index.spec.js"
   },
   "repository": {
