@@ -298,7 +298,7 @@ console.log(_);
       });
     });
 
-    xdescribe('pluck', function() {
+    describe('pluck', function() {
       it('should return values contained at a user-defined property', function() {
         var people = [
           { name: 'moe', age: 30 },
@@ -320,7 +320,7 @@ console.log(_);
       });
     });
 
-    xdescribe('contains', function() {
+    describe('contains', function() {
       var inputData = [1,"3",4,5,"a","4","b"];
 
       it('Should return true if a list contains an element', function() {
@@ -340,7 +340,7 @@ console.log(_);
       });
     });
 
-    xdescribe('every', function() {
+    describe('every', function() {
       var isEven = function(num) {
         return num % 2 === 0;
       };
@@ -383,7 +383,7 @@ console.log(_);
       });
     });
 
-    xdescribe('some', function() {
+    describe('some', function() {
       var isEven = function(number){
         return number % 2 === 0;
       };
@@ -428,7 +428,7 @@ console.log(_);
       });
     });
 
-    xdescribe('reduce', function() {
+    describe('reduce', function() {
       it('should be able to sum up an array', function() {
         var add = function(tally, item) {return tally + item; };
         var total = _.reduce([1, 2, 3], add, 0);
@@ -459,7 +459,7 @@ console.log(_);
 
     });
 
-    xdescribe('extend', function() {
+    describe('extend', function() {
       it('returns the first argument', function() {
         var to = {};
         var from = {};
