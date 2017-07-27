@@ -306,5 +306,5 @@ var _ = {};
 if((typeof process !== 'undefined') &&
    (typeof process.versions.node !== 'undefined')) {
     // here, export any references you need for tests //
-    module.exports._ = _;
+    module.exports = _;
 }
