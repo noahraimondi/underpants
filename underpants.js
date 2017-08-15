@@ -55,9 +55,10 @@ var _ = {};
 *   1) What if <number> is negative?
 *   2) What if <number> is greater than <array>.length?
 * Examples:
-*   _.first(["a","b","c"], 1) -> "a"
-*   _.first(["a","b","c"], 2) -> ["a", "b"]
-*   _.first(["a", "b", "c"], "ponies") -> ["a","b","c"]
+*   _.first("ponies", 1) -> []
+*   _.first(["a", "b", "c"], "ponies") -> "a"
+*   _.first(["a", "b", "c"], 1) -> "a"
+*   _.first(["a", "b", "c"], 2) -> ["a", "b"]
 */
 
 
@@ -70,11 +71,13 @@ var _ = {};
 *   2) If <number> is not given or not a number, return just the last element in <array>.
 *   3) Otherwise, return the last <number> items of <array>
 * Gotchas:
-*   1) What if <nubmer> is negative?
+*   1) What if <number> is negative?
 *   2) What if <number> is greater than <array>.length?
 * Examples:
-*   _.last(["a","b","c"], 2) -> ["b","c"]
-*   _.last(["a", "b", "c"], "ponies") -> ["a","b","c"]
+*   _.last("ponies", 2) -> []
+*   _.last(["a", "b", "c"], "ponies") -> "c"
+*   _.last(["a", "b", "c"], 1) -> "c"
+*   _.last(["a", "b", "c"], 2) -> ["b", "c"]
 */
 
 
