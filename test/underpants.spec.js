@@ -201,18 +201,8 @@ describe('Underpants', function() {
       expect(evens).to.not.equal(numbers);
     });
 
-    it('should use the _.filter function', function() {
-      var isEven = function(num) { return num % 2 === 0; };
-      expect(_.filter.called).to.be.false;
-
-      _.filter([1, 2, 3, 4, 5, 6], isEven);
-
-      console.log('filter', _.filter.called);
-      expect(_.filter.called).to.be.true;
-    });
-
     // TODO: Incorporate test to see if each is used
-    // it('should use the _.each function', function() {
+    // xit('should use the _.each function', function() {
     //   var isEven = function(num) { return num % 2 === 0; };
     //   expect(_.each.calledOnce).to.be.false;
     //
@@ -264,13 +254,14 @@ describe('Underpants', function() {
       expect(inputData).to.eql(["a",1,"b",2,"c",4]);
     });
 
-    xit('should use the _.filter function', function() {
-      expect(_.filter.called).to.be.true;
-    });
-
-    xit('should use the _.reject function', function() {
-      expect(_.reject.called).to.be.true;
-    });
+    // TODO: Add tests to check if filter and reject are used
+    // xit('should use the _.filter function', function() {
+    //   expect(_.filter.called).to.be.true;
+    // });
+    //
+    // xit('should use the _.reject function', function() {
+    //   expect(_.reject.called).to.be.true;
+    // });
   });
 
   describe('unique', function() {
@@ -313,10 +304,11 @@ describe('Underpants', function() {
       expect(mappedNumbers).to.not.equal(numbers);
     });
 
-    it('should use the _.each function', function() {
-      console.log(_.map.toString());
-      expect(_.map.toString()).to.contain('_.each');
-    });
+    // TODO: add test to see if each is used
+    // xit('should use the _.each function', function() {
+    //   console.log(_.map.toString());
+    //   expect(_.map.toString()).to.contain('_.each');
+    // });
   });
 
   describe('pluck', function() {
