@@ -32,6 +32,18 @@ describe('Underpants', function() {
   });
 
   describe('first', function() {
+    it('should return empty array if array is not provided', function() {
+      expect(_.first('pony', 0)).to.eql([]);
+    });
+
+    it('should pull out the first element of an array if no number provided', function() {
+      expect(_.first([1,2,3])).to.equal(1);
+    });
+
+    it('should pull out the first element of an array if number is not number', function() {
+      expect(_.first([1,2,3], 'pony')).to.equal(1);
+    });
+
     it('should return empty array if zero is passed in as the index', function() {
       expect(_.first([1,2,3], 0)).to.eql([]);
     });
@@ -44,34 +56,34 @@ describe('Underpants', function() {
       expect(_.first([1,2,3], 2)).to.eql([1, 2]);
     });
 
-    it('should pull out the first element of an array if not number provided', function() {
-      expect(_.first([1,2,3])).to.equal(1);
-    });
-
-    it('should be able to pull out the first element of an array', function() {
-      expect(_.first([1,2,3])).to.equal(1);
-    });
-
-    it('should return empty array if array is not provided', function() {
-      expect(_.first(undefined, 0)).to.eql([]);
-    });
-
     it('should return all the array\'s elements if the index argument is larger than the length of the array', function() {
       expect(_.first([1,2,3], 5)).to.eql([1, 2, 3]);
     });
   });
 
   describe('last', function() {
-    it('should pull the last element from an array', function() {
+    it('should return empty array if array is not provided', function() {
+      expect(_.last('pony', 0)).to.eql([]);
+    });
+
+    it('should pull out the last element of an array if no number provided', function() {
       expect(_.last([1,2,3])).to.equal(3);
     });
 
-    it('should accept an index argument', function() {
-      expect(_.last([1,2,3], 2)).to.eql([2, 3]);
+    it('should pull out the last element of an array if number is not number', function() {
+      expect(_.last([1,2,3], 'pony')).to.equal(3);
     });
 
     it('should return empty array if zero is passed in as the index', function() {
       expect(_.last([1,2,3], 0)).to.eql([]);
+    });
+
+    it('should return first element if one passed in as number', function() {
+      expect(_.last([1,2,3], 1)).to.eql(2);
+    });
+
+    it('should return array of two elements if two passed in as number', function() {
+      expect(_.last([1,2,3], 2)).to.eql([2, 3]);
     });
 
     it('should return all the array\'s elements if the index argument is larger than the length of the array', function() {
@@ -199,15 +211,16 @@ describe('Underpants', function() {
       expect(_.filter.called).to.be.true;
     });
 
-    it('should use the _.each function', function() {
-      var isEven = function(num) { return num % 2 === 0; };
-      expect(_.each.calledOnce).to.be.false;
-
-      _.filter([1, 2, 3, 4, 5, 6], isEven);
-
-      console.log('each', _.each);
-      expect(_.each.calledOnce).to.be.true;
-    });
+    // TODO: Incorporate test to see if each is used
+    // it('should use the _.each function', function() {
+    //   var isEven = function(num) { return num % 2 === 0; };
+    //   expect(_.each.calledOnce).to.be.false;
+    //
+    //   _.filter([1, 2, 3, 4, 5, 6], isEven);
+    //
+    //   console.log('each', _.each);
+    //   expect(_.each.calledOnce).to.be.true;
+    // });
   });
 
   describe('reject', function() {
@@ -232,6 +245,8 @@ describe('Underpants', function() {
 
       expect(evens).to.not.equal(numbers);
     });
+
+    // TODO: Incorporate test to see if filter is used
   });
 
   describe('partition', function() {
