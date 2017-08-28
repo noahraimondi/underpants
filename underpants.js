@@ -1,15 +1,10 @@
-// This is the proper way to start a javascript library
-(function() {
-
 // This makes the arguments variable behave the way we want it to and a few
 // other things. For more info:
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
 'use strict';
 
-// This allows us to use our "_" anywhere. In a web browser, properties of window
-// are available everywhere without having to type "window."
-/* global _ */
-window._ = {};
+var _ = {};
+
 
 /**
 * START OF OUR LIBRARY!
@@ -60,9 +55,10 @@ window._ = {};
 *   1) What if <number> is negative?
 *   2) What if <number> is greater than <array>.length?
 * Examples:
-*   _.first(["a","b","c"], 1) -> "a"
-*   _.first(["a","b","c"], 2) -> ["a", "b"]
-*   _.first(["a", "b", "c"], "ponies") -> ["a","b","c"]
+*   _.first("ponies", 1) -> []
+*   _.first(["a", "b", "c"], "ponies") -> "a"
+*   _.first(["a", "b", "c"], 1) -> "a"
+*   _.first(["a", "b", "c"], 2) -> ["a", "b"]
 */
 
 
@@ -75,11 +71,13 @@ window._ = {};
 *   2) If <number> is not given or not a number, return just the last element in <array>.
 *   3) Otherwise, return the last <number> items of <array>
 * Gotchas:
-*   1) What if <nubmer> is negative?
+*   1) What if <number> is negative?
 *   2) What if <number> is greater than <array>.length?
 * Examples:
-*   _.last(["a","b","c"], 2) -> ["b","c"]
-*   _.last(["a", "b", "c"], "ponies") -> ["a","b","c"]
+*   _.last("ponies", 2) -> []
+*   _.last(["a", "b", "c"], "ponies") -> "c"
+*   _.last(["a", "b", "c"], 1) -> "c"
+*   _.last(["a", "b", "c"], 2) -> ["b", "c"]
 */
 
 
@@ -304,5 +302,12 @@ window._ = {};
 */
 
 
-// This is the proper way to end a javascript library
-}());
+//////////////////////////////////////////////////////////////////////
+// DON'T REMOVE THIS CODE ////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+
+if((typeof process !== 'undefined') &&
+   (typeof process.versions.node !== 'undefined')) {
+    // here, export any references you need for tests //
+    module.exports = _;
+}
