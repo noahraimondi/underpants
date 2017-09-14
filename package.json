@@ -7,7 +7,9 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha ./test/underpants.spec.js"
+    "pretest": "npm install",
+    "test": "mocha ./test/underpants.spec.js || :",
+    "posttest": "rm -rf ./test ./node_modules"
   },
   "repository": {
     "type": "git",
