@@ -8,163 +8,62 @@ const
 describe('Underpants', function() {
 
   describe('identity', function() {
-    var uniqueObject = {};
-
-    it('should return whatever value is passed into it', function() {
-      expect(_.identity(1)).to.equal(1);
-      expect(_.identity('string')).to.equal('string');
-      expect(_.identity(false)).to.be.false;
-      expect(_.identity(uniqueObject)).to.equal(uniqueObject);
-    });
+    assert.strictEqual( _.identity(14), 14, "Should handle numbers.");
+    assert.deepEqual( _.identity({a: "one"}), {a: "one"}, "Should handle objects.");
+    assert.strictEqual(_.identity("hello there"), "hello there", "Should handle strings.");
+    assert.deepEqual(_.identity([1,2,3]), [1,2,3], "Should handle arrays.");
   });
 
   describe('typeOf', function() {
-    it('should return type of whatever value is passed into it', function() {
-      assert.strictEqual(_.typeOf("a"), "string", "Should handle strings");
-      assert.strictEqual(_.typeOf(10), "number", "Should handle numbers");
-      assert.strictEqual(_.typeOf([1,3]), "array", "Should handle arrays");
-      assert.strictEqual(_.typeOf({a: "one"}), "object", "Should handle objects");
-      assert.strictEqual(_.typeOf(false), "boolean", "Should handle booleans");
-      assert.strictEqual(_.typeOf(undefined), "undefined", "Should handle undefined");
-      assert.strictEqual(_.typeOf(null), "null", "Should handle null");
-      assert.strictEqual(_.typeOf(function(){}), "function", "Should handle functions");
-    });
+    assert.strictEqual(_.typeOf("a"), "string", "Should handle strings");
+    assert.strictEqual(_.typeOf(10), "number", "Should handle numbers");
+    assert.strictEqual(_.typeOf([1,3]), "array", "Should handle arrays");
+    assert.strictEqual(_.typeOf({a: "one"}), "object", "Should handle objects");
+    assert.strictEqual(_.typeOf(false), "boolean", "Should handle booleans");
+    assert.strictEqual(_.typeOf(undefined), "undefined", "Should handle undefined");
+    assert.strictEqual(_.typeOf(null), "null", "Should handle null");
+    assert.strictEqual(_.typeOf(function(){}), "function", "Should handle functions");
   });
 
   describe('first', function() {
-    it('should return empty array if array is not provided', function() {
-      expect(_.first('pony', 0)).to.eql([]);
-    });
-
-    it('should pull out the first element of an array if no number provided', function() {
-      expect(_.first([1,2,3])).to.equal(1);
-    });
-
-    it('should pull out the first element of an array if number is not number', function() {
-      expect(_.first([1,2,3], 'pony')).to.equal(1);
-    });
-
-    // it('should return empty array if zero is passed in as the index', function() {
-    //   expect(_.first([1,2,3], 0)).to.eql([]);
-    // });
-
-    it('should return first element if 1 is passed in as the index', function() {
-      expect(_.first([1,2,3], 1)).to.eql(1);
-    });
-
-    it('should return array of first two elements if 2 is passed in as the index', function() {
-      expect(_.first([1,2,3], 2)).to.eql([1, 2]);
-    });
-
-    it('should return all the array\'s elements if the index argument is larger than the length of the array', function() {
-      expect(_.first([1,2,3], 5)).to.eql([1, 2, 3]);
-    });
+    assert.deepEqual(_.first(["a","b","c"]) ,"a", "Should return the first element if no numerical argument is given.");
+    assert.deepEqual(_.first(["a","b","c"],2) ,["a","b"], "Should accept an argument representing the number of items to include in the output.");
+    assert.deepEqual(_.first(["a","b","c"], -1) ,[], "Should return empty list if numerical argument is not a positive number.");
+    assert.deepEqual(_.first(["a","b","c"], 5) ,["a","b","c"], "Should return the whole array if numerical argument is greater than the array's length.");
+    assert.deepEqual(_.first({a:"b"}, 2), [], "Should return empty array if the array param is not an array.");
   });
 
   describe('last', function() {
-    it('should return empty array if array is not provided', function() {
-      expect(_.last('pony', 0)).to.eql([]);
-    });
-
-    it('should pull out the last element of an array if no number provided', function() {
-      expect(_.last([1,2,3])).to.equal(3);
-    });
-
-    it('should pull out the last element of an array if number is not number', function() {
-      expect(_.last([1,2,3], 'pony')).to.equal(3);
-    });
-
-    it('should return empty array if zero is passed in as the index', function() {
-      expect(_.last([1,2,3], 0)).to.eql([]);
-    });
-
-    it('should return last element if 1 passed in as number', function() {
-      expect(_.last([1,2,3], 1)).to.eql(3);
-    });
-
-    it('should return array of last two elements if 2 passed in as number', function() {
-      expect(_.last([1,2,3], 2)).to.eql([2, 3]);
-    });
-
-    it('should return all the array\'s elements if the index argument is larger than the length of the array', function() {
-      expect(_.last([1,2,3], 5)).to.eql([1, 2, 3]);
-    });
+    assert.deepEqual(_.last(["a","b","c"]) ,"c", "Should return the last element if no numerical argument is given.");
+    assert.deepEqual(_.last(["a","b","c"],2) ,["b","c"], "Should accept an argument representing the number of items to include in the output.");
+    assert.deepEqual(_.last(["a","b","c"], -1) ,[], "Should return empty list if numerical argument is not a positive number.");
+    assert.deepEqual(_.last(["a","b","c"], 5) ,["a","b","c"], "Should return the whole array if numerical argument is greater than the array's length.");
+    assert.deepEqual(_.last({a:"b"}, 2), [], "Should return empty array if the array param is not an array.");
   });
 
   describe('each', function() {
-    it('should iterate over arrays, providing access to the element, index, and array itself', function() {
+    var inputArray = [1, 2, 3, 4, 5];
+    inputArray.ignoreMe = "this shouldn't show up";
+    var inputObject = { a: "1", b: "2", c: "3", d: "4" };
 
-      var animals = ['ant', 'bat', 'cat'];
-      var iterationInputs = [];
-
-      _.each(animals, function(animal, index, list) {
-        iterationInputs.push([animal, index, list]);
-      });
-
-      expect(iterationInputs).to.eql([
-        ['ant', 0, animals],
-        ['bat', 1, animals],
-        ['cat', 2, animals]
-      ]);
+    _.each(inputArray, function(e, i, a) {
+      inputArray[i] = e * a.length;
     });
+    assert.deepEqual(inputArray, [5, 10, 15, 20, 25], "Should handle arrays.");
 
-    it('should only iterate over the array elements, not properties of the array', function() {
-      var animals = ['ant', 'bat', 'cat'];
-      var iterationInputs = [];
-
-      animals.shouldBeIgnored = 'Ignore me!';
-
-      _.each(animals, function(animal, index, list) {
-        iterationInputs.push([animal, index, list]);
-      });
-
-      expect(iterationInputs).to.eql([
-        ['ant', 0, animals],
-        ['bat', 1, animals],
-        ['cat', 2, animals]
-      ]);
+    _.each(inputObject, function(v, k, o) {
+      inputObject[v] = k + Object.keys(o).length;
+      delete inputObject[k];
     });
-
-    it('should iterate over objects, providing access to the element, index, and object itself', function() {
-      var animals = { a: 'ant', b: 'bat', c: 'cat' };
-      var iterationInputs = [];
-
-      _.each(animals, function(animal, key, object) {
-        iterationInputs.push([animal, key, object]);
-      });
-
-      expect(iterationInputs).to.eql([
-        ['ant', 'a', animals],
-        ['bat', 'b', animals],
-        ['cat', 'c', animals]
-      ]);
-    });
+    assert.deepEqual(inputObject, { 1: "a4", 2: "b4", 3: "c4", 4: "d4" }, "Should handle Objects.");
   });
 
   describe('indexOf', function() {
-    it('should find 40 in the list', function() {
-      var numbers = [10, 20, 30, 40, 50];
-
-      expect(_.indexOf(numbers, 40)).to.equal(3);
-    });
-
-    it('should be able to compute indexOf even when the native function is undefined', function() {
-      var numbers = [10, 20, 30];
-
-      expect(_.indexOf(numbers, 20)).to.equal(1);
-    });
-
-    it('returns -1 when the target cannot be found not in the list', function() {
-      var numbers = [10, 20, 30, 40, 50];
-
-      expect(_.indexOf(numbers, 35)).to.equal(-1);
-    });
-
-    it('returns the first index that the target can be found at when there are multiple matches', function() {
-      var numbers = [1, 40, 40, 40, 40, 40, 40, 40, 50, 60, 70];
-
-      expect(_.indexOf(numbers, 40)).to.equal(1);
-    });
+    var inputData = ["a", "b", "c", "d"];
+    assert.deepEqual(_.indexOf(inputData, "b"), 1, "Should return the correct index when an element is found.");
+    assert.deepEqual(_.indexOf(inputData.concat("b"), "b"), 1, "Should return the index of the first occurance of a found element.");
+    assert.deepEqual(_.indexOf(inputData, "e"), -1, "Should return -1 if the element is not found.");
+    assert.deepEqual(inputData, ["a", "b", "c", "d"], "Should not have side effects.");
   });
 
   describe('filter', function() {
@@ -179,27 +78,11 @@ describe('Underpants', function() {
       _.filter.restore();
     });
 
-    it('should return all even numbers in an array', function() {
-      var isEven = function(num) { return num % 2 === 0; };
-      var evens = _.filter([1, 2, 3, 4, 5, 6], isEven);
-
-      expect(evens).to.eql([2, 4, 6]);
-    });
-
-    it('should return all odd numbers in an array', function() {
-      var isOdd = function(num) { return num % 2 !== 0; };
-      var odds = _.filter([1, 2, 3, 4, 5, 6], isOdd);
-
-      expect(odds).to.eql([1, 3, 5]);
-    });
-
-    it('should produce a brand new array instead of modifying the input array', function() {
-      var isOdd = function(num) { return num % 2 !== 0; };
-      var numbers = [1, 2, 3, 4, 5, 6];
-      var evens = _.filter(numbers, isOdd);
-
-      expect(evens).to.not.equal(numbers);
-    });
+    var inputData = ["a", 1, "b", 2, "c", 4];
+    assert.deepEqual(_.filter(inputData, function(e, i, a) {
+        return typeof e === "string" && i < a.length / 2;
+      }), ["a", "b"], "Should filter elements in an array.");
+    assert.deepEqual(inputData, ["a", 1, "b", 2, "c", 4], "Should not have side effects.");
 
     // TODO: Incorporate test to see if each is used
     // xit('should use the _.each function', function() {
@@ -214,45 +97,21 @@ describe('Underpants', function() {
   });
 
   describe('reject', function() {
-    it('should reject all even numbers', function() {
-      var isEven = function(num) { return num % 2 === 0; };
-      var odds = _.reject([1, 2, 3, 4, 5, 6], isEven);
-
-      expect(odds).to.eql([1, 3, 5]);
-    });
-
-    it('should reject all odd numbers', function() {
-      var isOdd = function(num) { return num % 2 !== 0; };
-      var evens = _.reject([1, 2, 3, 4, 5, 6], isOdd);
-
-      expect(evens).to.eql([2, 4, 6]);
-    });
-
-    it('should produce a brand new array instead of modifying the input array', function() {
-      var isOdd = function(num) { return num % 2 !== 0; };
-      var numbers = [1, 2, 3, 4, 5, 6];
-      var evens = _.reject(numbers, isOdd);
-
-      expect(evens).to.not.equal(numbers);
-    });
+    var inputData = ["a", 1, "b", 2, "c", 4];
+    assert.deepEqual(_.reject(inputData, function(e, i, a) {
+        return typeof e === "string" || i < a.length / 2;
+      }), [2, 4], "Should reject elements in an array.");
+    assert.deepEqual(inputData, ["a", 1, "b", 2, "c", 4], "Should not have side effects.");
 
     // TODO: Incorporate test to see if filter is used
   });
 
   describe('partition', function() {
-    var inputData = ["a",1,"b",2,"c",4];
-
-    it('Should reject elements in an array', function() {
-      var test = _.partition(inputData, function(e,i,a){
-          return typeof e === "string";
-      });
-      var result = [["a","b","c"],[1,2,4]];
-      expect(test).to.eql(result);
-    });
-
-    it('Should not have side effects', function() {
-      expect(inputData).to.eql(["a",1,"b",2,"c",4]);
-    });
+    var inputData = ["a", 1, "b", 2, "c", 4];
+    assert.deepEqual(_.partition(inputData, function(e, i, a) {
+        return typeof e === "string";
+      }), [["a", "b", "c"], [1, 2, 4]], "Should reject elements in an array.");
+    assert.deepEqual(inputData, ["a", 1, "b", 2, "c", 4], "Should not have side effects.");
 
     // TODO: Add tests to check if filter and reject are used
     // xit('should use the _.filter function', function() {
@@ -265,44 +124,21 @@ describe('Underpants', function() {
   });
 
   describe('unique', function() {
-    it('should return all unique values contained in an unsorted array', function() {
-      var numbers = [1, 2, 1, 3, 1, 4];
-
-      expect(_.unique(numbers)).to.eql([1, 2, 3, 4]);
-    });
-
-    it('should handle iterators that work with a sorted array', function() {
-      var iterator = function(value) { return value + 1; };
-      var numbers = [1, 2, 2, 3, 4, 4];
-
-      expect(_.unique(numbers, true, iterator)).to.eql([1, 2, 3, 4]);
-    });
-
-    it('should produce a brand new array instead of modifying the input array', function() {
-      var numbers = [1, 2, 1, 3, 1, 4];
-      var uniqueNumbers = _.unique(numbers);
-
-      expect(uniqueNumbers).to.not.equal(numbers);
-    });
+    var inputData = ["a", 1, 1, "a", "c", false, "b", 5, "c", null, false, null];
+    assert.deepEqual(_.unique(inputData), ["a", 1, "c", false, "b", 5, null], "Should return an array with no duplicates.");
+    assert.deepEqual(inputData, ["a", 1, 1, "a", "c", false, "b", 5, "c", null, false, null], "Should not have side effects.");
   });
 
   describe('map', function() {
-    it('should apply a function to every value in an array', function() {
-      var doubledNumbers = _.map([1, 2, 3], function(num) {
-        return num * 2;
-      });
-
-      expect(doubledNumbers).to.eql([2, 4, 6]);
-    });
-
-    it('should produce a brand new array instead of modifying the input array', function() {
-      var numbers = [1, 2, 3];
-      var mappedNumbers = _.map(numbers, function(num) {
-        return num;
-      });
-
-      expect(mappedNumbers).to.not.equal(numbers);
-    });
+    var inputArray = ["a", "b", "c", "d"];
+    var inputObject = { a: 1, b: 2, c: 3, d: 4 };
+    assert.deepEqual(_.map(inputArray, function(e, i, a) {
+        return e + i * a.length;
+      }), ["a0", "b4", "c8", "d12"], "Should map through arrays.");
+    assert.deepEqual(_.map(inputObject, function(v, k, o) {
+        return k + v * Object.keys(o).length;
+      }), ["a4", "b8", "c12", "d16"], "Should map through Objects.");
+    assert.deepEqual([inputArray, inputObject], [["a", "b", "c", "d"], { a: 1, b: 2, c: 3, d: 4 }], "Should not have side effects.");
 
     // TODO: add test to see if each is used
     // xit('should use the _.each function', function() {
@@ -312,209 +148,78 @@ describe('Underpants', function() {
   });
 
   describe('pluck', function() {
-    it('should return values contained at a user-defined property', function() {
-      var people = [
-        { name: 'moe', age: 30 },
-        { name: 'curly', age: 50 }
-      ];
-
-      expect(_.pluck(people, 'name')).to.eql(['moe', 'curly']);
-    });
-
-    it('should not modify the original array', function() {
-      var people = [
-        { name: 'moe', age: 30 },
-        { name: 'curly', age: 50 }
-      ];
-
-      _.pluck(people, 'name');
-
-      expect(people).to.eql([{ name: 'moe', age: 30 }, { name: 'curly', age: 50 }]);
-    });
+    var inputData = [{ name: "Ralph", age: 22 }, { name: "Jimmy", age: 13 }, { name: "Carla", age: 20 }];
+    assert.deepEqual(_.pluck(inputData, "name"), ["Ralph", "Jimmy", "Carla"], "Should pluck properties out of a list of objects.");
+    assert.deepEqual(inputData, [{ name: "Ralph", age: 22 }, { name: "Jimmy", age: 13 }, { name: "Carla", age: 20 }], "Should not have side effects.");
   });
 
   describe('contains', function() {
-    var inputData = [1,"3",4,5,"a","4","b"];
-
-    it('Should return true if a list contains an element', function() {
-      expect(_.contains(inputData, "a")).to.be.true;
-    });
-
-    it('Should return false if a list doesn\'t contain an element', function() {
-      expect(_.contains(inputData, "c")).to.be.false;
-    });
-
-    it('Should not convert types when checking', function(){
-      expect(_.contains(inputData, 3)).to.be.false;
-    });
-
-    it('Should not have side effects', function(){
-      expect(inputData).to.eql([1,"3",4,5,"a","4","b"]);
-    });
+    var inputData = [1, "3", 4, 5, "a", "4", "b"];
+    assert.strictEqual(_.contains(inputData, "a"), true, "Should return true if a list contains an element.");
+    assert.strictEqual(_.contains(inputData, "c"), false, "Should return false if a list doesn't contain an element.");
+    assert.strictEqual(_.contains(inputData, 3), false, "Should not convert types when checking.");
+    assert.deepEqual(inputData, [1, "3", 4, 5, "a", "4", "b"], "Should not have side effects.");
   });
 
   describe('every', function() {
-    var isEven = function(num) {
-      return num % 2 === 0;
-    };
-
-    it('passes by default for an empty collection', function() {
-      expect(_.every([], _.identity)).to.be.true;
-    });
-
-    it('passes for a collection of all-truthy results', function() {
-      expect(_.every([true, {}, 1], _.identity)).to.be.true;
-    });
-
-    it('fails for a collection of all-falsy results', function() {
-      expect(_.every([null, 0, undefined], _.identity)).to.be.false;
-    });
-
-    it('fails for a collection containing mixed falsy and truthy results', function() {
-      expect(_.every([true, false, 1], _.identity)).to.be.false;
-      expect(_.every([1, undefined, true], _.identity)).to.be.false;
-    });
-
-    it('should work when provided a collection containing undefined values', function() {
-      expect(_.every([undefined, undefined, undefined], _.identity)).to.be.false;
-    });
-
-    it('should cast the result to a boolean', function() {
-      expect(_.every([1], _.identity)).to.be.true;
-      expect(_.every([0], _.identity)).to.be.false;
-    });
-
-    it('should handle callbacks that manipulate the input', function() {
-      expect(_.every([0, 10, 28], isEven)).to.be.true;
-      expect(_.every([0, 11, 28], isEven)).to.be.false;
-    });
-
-    it('should work when no callback is provided', function() {
-      expect(_.every([true, true, true])).to.be.true;
-      expect(_.every([true, true, false])).to.be.false;
-      expect(_.every([false, false, false])).to.be.false;
-    });
+    var inputData = [2, 4, 6, 7, 8];
+    var inputDataTruthy = [1, [], true, "a"];
+    var inputDataFalsy = ["", 0, false, null];
+    var inputObject = { a: "one", b: "two", c: "three" };
+    assert.deepEqual(_.every(inputData, function(v) {
+        return v % 2 === 0 || v === 7;
+      }), true, "Should return true when all iterations are true");
+    assert.deepEqual(_.every(inputData, function(v) {
+        return v % 2 === 0;
+      }), false, "Should return false when not all iterations are true");
+    assert.deepEqual(_.every(inputObject, function(v, k, o) {
+        return ["aone3", "btwo3", "cthree3"].indexOf(k + v + Object.keys(o).length) !== -1;
+      }), true, "Should handle objects");
+    assert.deepEqual(_.every(inputDataTruthy), true, "Should return true for truthy results when no function is passed in.");
+    assert.deepEqual(_.every(inputDataFalsy), false, "Should return false for falsy results when no function is passed in.");
+    assert.deepEqual(inputData, [2, 4, 6, 7, 8], "Should not have side effects.");
   });
 
   describe('some', function() {
-    var isEven = function(number){
-      return number % 2 === 0;
-    };
-
-    it('should fail by default for an empty collection', function() {
-      expect(_.some([])).to.be.false;
-    });
-
-    it('should pass for a collection of all-truthy results', function() {
-      expect(_.some([true, {}, 1], _.identity)).to.be.true;
-    });
-
-    it('should fail for a collection of all-falsy results', function() {
-      expect(_.some([null, 0, undefined], _.identity)).to.be.false;
-    });
-
-    it('should pass for a collection containing mixed falsy and truthy results', function() {
-      expect(_.some([true, false, 1], _.identity)).to.be.true;
-    });
-
-    it('should pass for a set containing one truthy value that is a string', function() {
-      expect(_.some([null, 0, 'yes', false], _.identity)).to.be.true;
-    });
-
-    it('should fail for a set containing no matching values', function() {
-      expect(_.some([1, 11, 29], isEven)).to.be.false;
-    });
-
-    it('should pass for a collection containing one matching value', function() {
-      expect(_.some([1, 10, 29], isEven)).to.be.true;
-    });
-
-    it('should cast the result to a boolean', function() {
-      expect(_.some([1], _.identity)).to.be.true;
-      expect(_.some([0], _.identity)).to.be.false;
-    });
-
-    it('should work when no callback is provided', function() {
-      expect(_.some([true, true, true])).to.be.true;
-      expect(_.some([true, true, false])).to.be.true;
-      expect(_.some([false, false, false])).to.be.false;
-    });
+    var inputData = [2, 4, 6, 7, 8];
+    var inputDataTruthy = [1, [], true, "a"];
+    var inputDataFalsy = ["", 0, false, null];
+    var inputObject = { a: "one", b: "two", c: "three" };
+    assert.deepEqual(_.some(inputData, function(v) {
+        return v === 7;
+      }), true, "Should return true when at least one iteration is true");
+    assert.deepEqual(_.some(inputData, function(v) {
+        return v > 10;
+      }), false, "Should return false when no iterations are true");
+    assert.deepEqual(_.some(inputObject, function(v, k, o) {
+        return ["aone3", "btwo3"].indexOf(k + v + Object.keys(o).length) !== -1;
+      }), true, "Should handle objects");
+    assert.deepEqual(_.some(inputDataTruthy), true, "Should return true for truthy results when no function is passed in.");
+    assert.deepEqual(_.some(inputDataFalsy), false, "Should return false for falsy results when no function is passed in.");
+    assert.deepEqual(inputData, [2, 4, 6, 7, 8], "Should not have side effects.");
   });
 
   describe('reduce', function() {
-    it('should be able to sum up an array', function() {
-      var add = function(tally, item) {return tally + item; };
-      var total = _.reduce([1, 2, 3], add, 0);
-
-      expect(total).to.equal(6);
-    });
-
-    it('should use the first element as an accumulator when none is given', function() {
-      var add = function(tally, item) {return tally + item; };
-      var total = _.reduce([1, 2, 3], add);
-
-      expect(total).to.equal(6);
-    });
-
-    it('should invoke the iterator on the first element when given an accumulator', function() {
-      var sumSquares = function(tally, item) {return tally + item * item; };
-      var total = _.reduce([2, 3], sumSquares, 0);
-
-      expect(total).to.equal(13);
-    });
-
-    it('should not invoke the iterator on the first element when using it as an accumulator', function() {
-      var sumSquares = function(tally, item) {return tally + item * item; };
-      var total = _.reduce([2, 3], sumSquares);
-
-      expect(total).to.equal(11);
-    });
-
+    assert.strictEqual(_.reduce(inputArray, function(memo, element, i){
+        return memo + element + i;
+    }, 10), 116, "Should work with an array and a seed");
+    assert.strictEqual(_.reduce(inputArray, function(memo, element, i){
+        return memo * element * (i+1);
+    }), 5760000, "Should work without a seed");
+    assert.strictEqual(_.reduce(inputArray, function(memo, element, i){
+        return memo * element * (i+1);
+    }, 0), 0, "Should work when seed is falsy");
   });
 
   describe('extend', function() {
-    it('returns the first argument', function() {
-      var to = {};
-      var from = {};
-      var extended = _.extend(to, from);
-
-      expect(extended).to.equal(to);
-    });
-
-    it('should extend an object with the attributes of another', function() {
-      var to = {};
-      var from = { a: 'b' };
-      var extended = _.extend(to, from);
-
-      expect(extended.a).to.equal('b');
-    });
-
-    it('should override properties found on the destination', function() {
-      var to = { a: 'x' };
-      var from = { a: 'b' };
-      var extended = _.extend(to, from);
-
-      expect(extended.a).to.equal('b');
-    });
-
-    it('should not override properties not found in the source', function() {
-      var to = { x: 'x' };
-      var from = { a: 'b' };
-      var extended = _.extend(to, from);
-
-      expect(extended.x).to.equal('x');
-    });
-
-    it('should extend from multiple source objects', function() {
-      var extended = _.extend({ x: 1 }, { a: 2 }, { b:3 });
-
-      expect(extended).to.eql({ x: 1, a: 2, b: 3 });
-    });
-
-    it('in the case of a conflict, it should use the last property\'s values when extending from multiple source objects', function() {
-      var extended = _.extend({ x: 'x' }, { a: 'a', x: 2 }, { a: 1 });
-
-      expect(extended).to.eql({ x: 2, a: 1 });
-    });
+    var inputData = { a: "one", b: "two" };
+    _.extend(inputData, { c: "three", d: "four" });
+    assert.deepEqual(inputData, { a: "one", b: "two", c: "three", d: "four" }, "Should extend an object.");
+    inputData = { a: "one", b: "two" };
+    _.extend(inputData, { a: "three", d: "four" });
+    assert.deepEqual(inputData, { a: "three", b: "two", d: "four" }, "Should overwrite existing properties");
+    inputData = { a: "one", b: "two" };
+    _.extend(inputData);
+    assert.deepEqual(_.extend(inputData, { a: "three", c: "four" }, { d: "five", c: "six" }), { a: "three", b: "two", c: "six", d: "five" }, "Should handle any number of arguments.");
   });
 });
