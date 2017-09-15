@@ -1,6 +1,7 @@
 {
   "name": "underpants",
   "version": "1.0.0",
+  "private": true,
   "description": "Functional Functions for Fun",
   "main": "data.js",
   "directories": {
