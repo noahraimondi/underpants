@@ -8,10 +8,18 @@ const
 describe('Underpants', function() {
 
   describe('identity', function() {
-    assert.strictEqual( _.identity(14), 14, "Should handle numbers.");
-    assert.deepEqual( _.identity({a: "one"}), {a: "one"}, "Should handle objects.");
-    assert.strictEqual(_.identity("hello there"), "hello there", "Should handle strings.");
-    assert.deepEqual(_.identity([1,2,3]), [1,2,3], "Should handle arrays.");
+    it('Should handle numbers.', function() {
+      expect(_.identity(14)).to.equal(14);
+    }); 
+    it('Should handle objects.', function() {
+      expect(_.identity({a: 'one'})).to.eql({a: 'one'});
+    });
+    it('Should handle strings.', function() {
+      expect(_.identity('Hello there!')).to.eql('Hello there!');
+    });
+    it('Should handle arrays.', function() {
+      expect(_.identity([1,2,3])).to.eql([1,2,3]);
+    });
   });
 
   describe('typeOf', function() {
@@ -45,7 +53,6 @@ describe('Underpants', function() {
     var inputArray = [1, 2, 3, 4, 5];
     inputArray.ignoreMe = "this shouldn't show up";
     var inputObject = { a: "1", b: "2", c: "3", d: "4" };
-
     _.each(inputArray, function(e, i, a) {
       inputArray[i] = e * a.length;
     });
