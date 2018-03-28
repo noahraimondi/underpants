@@ -185,6 +185,7 @@ QUnit.test("_.reduce()", function(assert){
     assert.strictEqual(_.reduce(inputArray, function(memo, element, i){
         return memo * element * (i+1);
     }, 0), 0, "Should work when seed is falsy");
+    assert.deepEqual(inputArray, [10,20,30,40], "Should not have side effects");
 });
 
 QUnit.test("_.extend()", function(assert){

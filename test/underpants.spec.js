@@ -324,6 +324,9 @@ describe('Underpants', function() {
         return memo * element * (i+1);
       }, 0)).to.equal(0);
     });
+    it("Should not have side effects", function() {
+      expect(inputArray).to.equal([10, 20, 30, 40]);
+    });
   });
 
   describe('extend', function() {
