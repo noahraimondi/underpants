@@ -84,6 +84,38 @@ describe('Underpants', function() {
       expect(_.last({a:"b"}, 2)).to.eql([]);
     });
   });
+  
+  describe('indexOf', function() {
+    var inputData = ["a", "b", "c", "d"];
+    it("Should return the correct index when an element is found.", function() {
+      expect(_.indexOf(inputData, "b")).to.equal(1);
+    });
+    it("Should return the index of the first occurance of a found element.", function() {
+      expect(_.indexOf(inputData.concat("b"), "b")).to.equal(1);
+    });
+    it("Should return -1 if the element is not found.", function() {
+      expect(_.indexOf(inputData, "e")).to.equal(-1);
+    });
+    it("Should not have side effects.", function() {
+      expect(inputData).to.eql(["a", "b", "c", "d"]);
+    });
+  });
+  
+  describe('contains', function() {
+    var inputData = [1, "3", 4, 5, "a", "4", "b"];
+    it("Should return true if a list contains an element.", function() {
+      expect(_.contains(inputData, "a")).to.eql(true);
+    });
+    it("Should return false if a list doesn't contain an element.", function() {
+      expect(_.contains(inputData, "c")).to.eql(false);
+    });
+    it("Should not convert types when checking.", function() {
+      expect(_.contains(inputData, 3)).to.eql(false);
+    });
+    it("Should not have side effects.", function() {
+      expect(inputData).to.eql([1, "3", 4, 5, "a", "4", "b"]);
+    });
+  });
 
   describe('each', function() {
     it("Should handle arrays.", function() {
@@ -102,20 +134,14 @@ describe('Underpants', function() {
       expect(inputObject).to.eql({ 1: "a4", 2: "b4", 3: "c4", 4: "d4" });
     });
   });
-
-  describe('indexOf', function() {
-    var inputData = ["a", "b", "c", "d"];
-    it("Should return the correct index when an element is found.", function() {
-      expect(_.indexOf(inputData, "b")).to.equal(1);
-    });
-    it("Should return the index of the first occurance of a found element.", function() {
-      expect(_.indexOf(inputData.concat("b"), "b")).to.equal(1);
-    });
-    it("Should return -1 if the element is not found.", function() {
-      expect(_.indexOf(inputData, "e")).to.equal(-1);
+  
+  describe('unique', function() {
+    var inputData = ["a", 1, 1, "a", "c", false, "b", 5, "c", null, false, null];
+    it("Should return an array with no duplicates.", function() {
+      expect(_.unique(inputData)).to.eql(["a", 1, "c", false, "b", 5, null]);
     });
     it("Should not have side effects.", function() {
-      expect(inputData).to.eql(["a", "b", "c", "d"]);
+      expect(inputData).to.eql(["a", 1, 1, "a", "c", false, "b", 5, "c", null, false, null]);
     });
   });
 
@@ -184,16 +210,6 @@ describe('Underpants', function() {
     // });
   });
 
-  describe('unique', function() {
-    var inputData = ["a", 1, 1, "a", "c", false, "b", 5, "c", null, false, null];
-    it("Should return an array with no duplicates.", function() {
-      expect(_.unique(inputData)).to.eql(["a", 1, "c", false, "b", 5, null]);
-    });
-    it("Should not have side effects.", function() {
-      expect(inputData).to.eql(["a", 1, 1, "a", "c", false, "b", 5, "c", null, false, null]);
-    });
-  });
-
   describe('map', function() {
     var inputArray = ["a", "b", "c", "d"];
     var inputObject = { a: 1, b: 2, c: 3, d: 4 };
@@ -227,22 +243,6 @@ describe('Underpants', function() {
       expect(inputData).to.eql([{ name: "Ralph", age: 22 }, { name: "Jimmy", age: 13 }, { name: "Carla", age: 20 }]);
     });
 
-  });
-
-  describe('contains', function() {
-    var inputData = [1, "3", 4, 5, "a", "4", "b"];
-    it("Should return true if a list contains an element.", function() {
-      expect(_.contains(inputData, "a")).to.eql(true);
-    });
-    it("Should return false if a list doesn't contain an element.", function() {
-      expect(_.contains(inputData, "c")).to.eql(false);
-    });
-    it("Should not convert types when checking.", function() {
-      expect(_.contains(inputData, 3)).to.eql(false);
-    });
-    it("Should not have side effects.", function() {
-      expect(inputData).to.eql([1, "3", 4, 5, "a", "4", "b"]);
-    });
   });
 
   describe('every', function() {

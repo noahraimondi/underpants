@@ -11,22 +11,22 @@ var _ = {};
 * Implement each function below it's instructions
 */
 
-/** _.identity()
+/** _.identity
 * Arguments:
-*   1) Anything
+*   1) Any value
 * Objectives:
-*   1) Returns <anything> unchanged
+*   1) Returns <value> unchanged
 * Examples:
 *   _.identity(5) === 5
 *   _.identity({a: "b"}) === {a: "b"}
 */
 
 
-/** _.typeOf()
+/** _.typeOf
 * Arguments:
-*   1) Anything
+*   1) Any value
 * Objectives:
-*   1) Return the type of <anything> as a string
+*   1) Return the type of <value> as a string
 *       Types are one of:
 *          - "string"
 *          - "array"
@@ -43,7 +43,7 @@ var _ = {};
 */
 
 
-/** _.first()
+/** _.first
 * Arguments:
 *   1) An array
 *   2) A number
@@ -51,7 +51,7 @@ var _ = {};
 *   1) If <array> is not an array, return []
 *   2) If <number> is not given or not a number, return just the first element in <array>.
 *   3) Otherwise, return the first <number> items of <array>
-* Gotchas:
+* Edge Cases:
 *   1) What if <number> is negative?
 *   2) What if <number> is greater than <array>.length?
 * Examples:
@@ -62,7 +62,7 @@ var _ = {};
 */
 
 
-/** _.last()
+/** _.last
 * Arguments:
 *   1) An array
 *   2) A number
@@ -70,7 +70,7 @@ var _ = {};
 *   1) If <array> is not an array, return []
 *   2) If <number> is not given or not a number, return just the last element in <array>.
 *   3) Otherwise, return the last <number> items of <array>
-* Gotchas:
+* Edge Cases:
 *   1) What if <number> is negative?
 *   2) What if <number> is greater than <array>.length?
 * Examples:
@@ -81,7 +81,40 @@ var _ = {};
 */
 
 
-/** _.each()
+/** _.indexOf
+* Arguments:
+*   1) An array
+*   2) A value
+* Objectives:
+*   1) Return the index of <array> that is the first occurrance of <value>
+*   2) Return -1 if <value> is not in <array>
+*   3) Do not use [].indexOf()!
+* Edge Cases:
+*   1) What if <array> has multiple occurances of val?
+*   2) What if <val> isn't in <array>?
+* Examples:
+*   _.indexOf(["a","b","c"], "c") -> 2
+*   _.indexOf(["a","b","c"], "d") -> -1
+*/
+
+
+/** _.contains
+* Arguments:
+*   1) An array
+*   2) A value
+* Objectives:
+*   1) Return true if <array> contains <value>
+*   2) Return false otherwise
+*   3) You must use the ternary operator in your implementation.
+* Edge Cases:
+*   1) did you use === ?
+*   2) what if no <value> is given?
+* Examples:
+*   _.contains([1,"two", 3.14], "two") -> true
+*/
+
+
+/** _.each
 * Arguments:
 *   1) A collection
 *   2) A function
@@ -98,24 +131,18 @@ var _ = {};
 */
 
 
-/** _.indexOf()
+/** _.unique
 * Arguments:
 *   1) An array
-*   2) A value
 * Objectives:
-*   1) Return the index of <array> that is the first occurrance of <value>
-*   2) Return -1 if <value> is not in <array>
-*   3) Do not use [].indexOf()!
-* Gotchas:
-*   1) What if <array> has multiple occurances of val?
-*   2) What if <val> isn't in <array>?
+*   1) Return a new array of all elements from <array> with duplicates removed
+*   2) Use _.indexOf() from above
 * Examples:
-*   _.indexOf(["a","b","c"], "c") -> 2
-*   _.indexOf(["a","b","c"], "d") -> -1
+*   _.unique([1,2,2,4,5,6,5,2]) -> [1,2,4,5,6]
 */
 
 
-/** _.filter()
+/** _.filter
 * Arguments:
 *   1) An array
 *   2) A function
@@ -123,7 +150,7 @@ var _ = {};
 *   1) call <function> for each element in <array> passing the arguments:
 *      the element, it's index, <array>
 *   2) return a new array of elements for which calling <function> returned true
-* Gotchas:
+* Edge Cases:
 *   1) What if <function> returns something other than true or false?
 * Examples:
 *   _.filter([1,2,3,4,5], function(x){return x%2 === 0}) -> [2,4]
@@ -132,7 +159,7 @@ var _ = {};
 */
 
 
-/** _.reject()
+/** _.reject
 * Arguments:
 *   1) An array
 *   2) A function
@@ -146,7 +173,7 @@ var _ = {};
 */
 
 
-/** _.partition()
+/** _.partition
 * Arguments:
 *   1) An array
 *   2) A function
@@ -156,7 +183,7 @@ var _ = {};
 *   2) Return an array that is made up of 2 sub arrays:
 *       0) An array that contains all the values for which <function> returned something truthy
 *       1) An array that contains all the values for which <function> returned something falsy
-* Gotchas:
+* Edge Cases:
 *   1) This is going to return an array of arrays.
 * Examples:
 *   _.partition([1,2,3,4,5], function(element,index,arr){
@@ -166,18 +193,7 @@ var _ = {};
 */
 
 
-/** _.unique()
-* Arguments:
-*   1) An array
-* Objectives:
-*   1) Return a new array of all elements from <array> with duplicates removed
-*   2) Use _.indexOf() from above
-* Examples:
-*   _.unique([1,2,2,4,5,6,5,2]) -> [1,2,4,5,6]
-*/
-
-
-/** _.map()
+/** _.map
 * Arguments:
 *   1) A collection
 *   2) a function
@@ -194,7 +210,7 @@ var _ = {};
 */
 
 
-/** _.pluck()
+/** _.pluck
 * Arguments:
 *   1) An array of objects
 *   2) A property
@@ -206,23 +222,7 @@ var _ = {};
 */
 
 
-/** _.contains()
-* Arguments:
-*   1) An array
-*   2) A value
-* Objectives:
-*   1) Return true if <array> contains <value>
-*   2) Return false otherwise
-*   3) You must use the ternary operator in your implementation.
-* Gotchas:
-*   1) did you use === ?
-*   2) what if no <value> is given?
-* Examples:
-*   _.contains([1,"two", 3.14], "two") -> true
-*/
-
-
-/** _.every()
+/** _.every
 * Arguments:
 *   1) A collection
 *   2) A function
@@ -235,7 +235,7 @@ var _ = {};
 *   2) If the return value of calling <function> for every element is true, return true
 *   3) If even one of them returns false, return false
 *   4) If <function> is not provided, return true if every element is truthy, otherwise return false
-* Gotchas:
+* Edge Cases:
 *   1) what if <function> doesn't return a boolean
 *   2) What if <function> is not given?
 * Examples:
@@ -244,7 +244,7 @@ var _ = {};
 */
 
 
-/** _.some()
+/** _.some
 * Arguments:
 *   1) A collection
 *   2) A function
@@ -257,7 +257,7 @@ var _ = {};
 *   2) If the return value of calling <function> is true for at least one element, return true
 *   3) If it is false for all elements, return false
 *   4) If <function> is not provided return true if at least one element is truthy, otherwise return false
-* Gotchas:
+* Edge Cases:
 *   1) what if <function> doesn't return a boolean
 *   2) What if <function> is not given?
 * Examples:
@@ -266,7 +266,7 @@ var _ = {};
 */
 
 
-/** _.reduce()
+/** _.reduce
 * Arguments:
 *   1) An array
 *   2) A function
@@ -279,14 +279,14 @@ var _ = {};
 *   3) On the very first iteration, use <seed> as the "previous result"
 *   4) If no <seed> was given, use the first element/value of <collection> as <seed>
 *   5) After the last iteration, return the return value of the final <function> call
-* Gotchas:
+* Edge Cases:
 *   1) What if <seed> is not given?
 * Examples:
 *   _.reduce([1,2,3], function(previousSum, currentValue, currentIndex){ return previousSum + currentValue }, 0) -> 6
 */
 
 
-/** _.extend()
+/** _.extend
 * Arguments:
 *   1) An Object
 *   2) An Object
@@ -300,7 +300,6 @@ var _ = {};
 *   _.extend(data, {b:"two"}); -> data now equals {a:"one",b:"two"}
 *   _.extend(data, {a:"two"}); -> data now equals {a:"two"}
 */
-
 
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
