@@ -17,7 +17,7 @@ This means that if we're confused about how a function should work, we can check
 
 Some quick notes that may come in handy:
 
-- [underscore documentation](http://underscore.js).
+- [underscore documentation](http://underscorejs.org/).
 - Many of the functions operate on "collections." They can take both arrays or
   objects as their arguments and you need to be able to handle both cases.
     - You can use `Array.isArray(obj)` to find out whether an object is an array.
