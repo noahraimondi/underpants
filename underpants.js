@@ -167,7 +167,7 @@ var _ = {};
 *   1) call <function> for each element in <array> passing the arguments:
 *      the element, it's index, <array>
 *   2) return a new array of elements for which calling <function> returned false
-*   3) This is the logical inverse if _.filter(), you must use _.filter() in your implementation
+*   3) This is the logical inverse if _.filter()
 * Examples:
 *   _.reject([1,2,3,4,5], function(e){return e%2 === 0}) -> [1,3,5]
 */
