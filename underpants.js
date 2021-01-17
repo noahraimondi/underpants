@@ -8,7 +8,7 @@ var _ = {};
 
 /**
 * START OF OUR LIBRARY!
-* Implement each function below it's instructions
+* Implement each function below its instructions
 */
 
 /** _.identity
