@@ -233,8 +233,6 @@ _.each = function (collection, cb) {
     }
 }
 
-
-
 /** _.unique
 * Arguments:
 *   1) An array
@@ -247,8 +245,19 @@ _.each = function (collection, cb) {
 
 _.unique = function (array) {
     // create conditionals 
-    //create a for loop 
-    //
+    //create a for loop *
+    //check if elements in array have a duplicate
+    //remove the extra elements
+    //return the "new" array without duplicates
+    var results = []
+    //looping through array
+    for (let i = 0; i < array.length; i++){
+        //if array value is not in results
+        if (results.includes(array[i]) === false) {
+            results.push(array[i])
+        }
+    }
+    return results;
 }
 
 /** _.filter
@@ -339,6 +348,7 @@ _.map = function (collection, placeholder) {
 * Examples:
 *   _.pluck([{a: "one"}, {a: "two"}], "a") -> ["one", "two"]
 */
+
 _.pluck = function (collection, key) {
     return _.map(collection, function (array) {
         return array[key];
