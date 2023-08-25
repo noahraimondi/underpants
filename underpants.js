@@ -21,6 +21,10 @@ var _ = {};
 *   _.identity({a: "b"}) === {a: "b"}
 */
 
+_.identity = function (value) {
+    return value;
+};
+
 
 /** _.typeOf
 * Arguments:
@@ -41,6 +45,34 @@ var _ = {};
 * _.typeOf("javascript") -> "string"
 * _.typeOf([1,2,3]) -> "array"
 */
+_.typeOf = function (value) {
+    if (typeof value === "string") {
+        return "string";
+    } else if (null === value) {
+        return "null"
+    } else if (Array.isArray(value) === true) {
+        console.log(Array.isArray(value))
+        return "array";
+    } else if (typeof value === "object") {
+        console.log(Array.isArray(value))
+        return "object";
+    } else if (typeof value === "undefined") {
+        return "undefined";
+    } else if (typeof value === "number") {
+        return "number";
+    } else if (typeof value === "boolean") {
+        return "boolean";
+    } else if (typeof value === "function") {
+        return "function";
+    }
+}
+
+
+
+
+
+
+    ;
 
 
 /** _.first
@@ -61,6 +93,24 @@ var _ = {};
 *   _.first(["a", "b", "c"], 2) -> ["a", "b"]
 */
 
+_.first = function (array, number) {
+    if (number < 0) {
+        return [];
+    }
+    if (Array.isArray(array) === false) {
+        return []
+    }
+    if (array.length < number) {
+        return array.slice(0, array.length)
+    }
+    if (number) {
+        return array.slice(0, number);
+    } if (number === undefined) {
+        return array['0'];
+    }
+
+
+};
 
 /** _.last
 * Arguments:
@@ -81,6 +131,29 @@ var _ = {};
 */
 
 
+_.last = function (array, number) {
+    if (number < 0) {
+        return [];
+    }//3
+    if (number === undefined) {
+        return array['2'];
+    }
+    if (number > array.length) {
+        return array.slice(0, number);
+    }
+    if (Array.isArray(array) === false) {
+        return [];
+    }
+    if (number) {
+        return array.slice(1, number + 1)
+    }// 2.
+
+}
+
+
+
+
+
 /** _.indexOf
 * Arguments:
 *   1) An array
@@ -96,7 +169,14 @@ var _ = {};
 *   _.indexOf(["a","b","c"], "c") -> 2
 *   _.indexOf(["a","b","c"], "d") -> -1
 */
-
+_.indexOf = function (array, number) {
+    for (var i = 0; i < array.length; i++) {
+        if (number === array[i]) {
+            return i;
+        }
+    }
+    return -1;
+}
 
 /** _.contains
 * Arguments:
@@ -113,6 +193,16 @@ var _ = {};
 *   _.contains([1,"two", 3.14], "two") -> true
 */
 
+_.contains = function (array, value) {
+    // looping through the array
+    for (var i = 0; i < array.length; i++) {
+        // checking if the array[i] is equal to value
+        if (array[i] === value) {
+            return true;
+        }
+    }
+    return false;
+}
 
 /** _.each
 * Arguments:
@@ -129,6 +219,20 @@ var _ = {};
 *   _.each(["a","b","c"], function(e,i,a){ console.log(e)});
 *      -> should log "a" "b" "c" to the console
 */
+_.each = function (collection, cb) {
+    // this line checks if collection is an array
+    if (Array.isArray(collection)) {
+        for (let i = 0; i < collection.length; i++) {
+            cb(collection[i], i, collection);
+        }
+    }
+    if ( Array.isArray(collection) === false) {
+        for (let key in collection){
+            cb(collection[key], key, collection );
+        }
+    }
+}
+
 
 
 /** _.unique
@@ -141,6 +245,11 @@ var _ = {};
 *   _.unique([1,2,2,4,5,6,5,2]) -> [1,2,4,5,6]
 */
 
+_.unique = function (array) {
+    // create conditionals 
+    //create a for loop 
+    //
+}
 
 /** _.filter
 * Arguments:
@@ -157,7 +266,8 @@ var _ = {};
 * Extra Credit:
 *   use _.each in your implementation
 */
-
+_.filter = function (collection, test) {
+}
 
 /** _.reject
 * Arguments:
@@ -171,6 +281,12 @@ var _ = {};
 * Examples:
 *   _.reject([1,2,3,4,5], function(e){return e%2 === 0}) -> [1,3,5]
 */
+
+_.reject = function (array, test) {
+
+}
+
+
 
 
 /** _.partition
@@ -208,6 +324,9 @@ var _ = {};
 * Examples:
 *   _.map([1,2,3,4], function(e){return e * 2}) -> [2,4,6,8]
 */
+_.map = function (collection, placeholder) {
+
+}
 
 
 /** _.pluck
@@ -220,7 +339,11 @@ var _ = {};
 * Examples:
 *   _.pluck([{a: "one"}, {a: "two"}], "a") -> ["one", "two"]
 */
-
+_.pluck = function (collection, key) {
+    return _.map(collection, function (array) {
+        return array[key];
+    })
+}
 
 /** _.every
 * Arguments:
@@ -305,8 +428,8 @@ var _ = {};
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 
-if((typeof process !== 'undefined') &&
-   (typeof process.versions.node !== 'undefined')) {
+if ((typeof process !== 'undefined') &&
+    (typeof process.versions.node !== 'undefined')) {
     // here, export any references you need for tests //
     module.exports = _;
 }
