@@ -226,9 +226,9 @@ _.each = function (collection, cb) {
             cb(collection[i], i, collection);
         }
     }
-    if ( Array.isArray(collection) === false) {
-        for (let key in collection){
-            cb(collection[key], key, collection );
+    if (Array.isArray(collection) === false) {
+        for (let key in collection) {
+            cb(collection[key], key, collection);
         }
     }
 }
@@ -244,14 +244,14 @@ _.each = function (collection, cb) {
 */
 
 _.unique = function (array) {
-    // create conditionals 
+    // create conditionals
     //create a for loop *
     //check if elements in array have a duplicate
     //remove the extra elements
     //return the "new" array without duplicates
     var results = []
     //looping through array
-    for (let i = 0; i < array.length; i++){
+    for (let i = 0; i < array.length; i++) {
         //if array value is not in results
         if (results.includes(array[i]) === false) {
             results.push(array[i])
@@ -275,7 +275,18 @@ _.unique = function (array) {
 * Extra Credit:
 *   use _.each in your implementation
 */
-_.filter = function (collection, test) {
+_.filter = function (array, func) {
+    //created a varible to establish empty array
+    var filteredArray = [];
+    // looping through the array
+    for (let i = 0; i < array.length; i++) {
+        var j = array[i];
+        if (func(j, i, array)) {
+            //adding new items to the end of the array
+            filteredArray.push(j);
+        }
+    }
+    return filteredArray;
 }
 
 /** _.reject
@@ -292,7 +303,15 @@ _.filter = function (collection, test) {
 */
 
 _.reject = function (array, test) {
+    var Rarray = [];
 
+    for (let i = 0; i < array.length; i++) {
+        var j = array[i];
+        if (!test(j, i, array)) {
+            Rarray.push(j);
+        }
+    }
+    return Rarray;
 }
 
 
@@ -316,6 +335,25 @@ _.reject = function (array, test) {
 *   }); -> [[2,4],[1,3,5]]
 }
 */
+
+_.partition = function (array, func) {
+    // creating varibles to contain the true and false value arrays
+    var trueval = [];
+    var falseval = [];
+    //creating a loop to find values
+    for (let i = 0; i < array.length; i++) {
+        var j = array[i];
+        if (func(j, i, array)) {
+            trueval.push(j);
+        } else {
+            falseval.push(j);
+        }
+    }
+    return [trueval, falseval];
+}
+
+
+
 
 
 /** _.map
@@ -349,10 +387,18 @@ _.map = function (collection, placeholder) {
 *   _.pluck([{a: "one"}, {a: "two"}], "a") -> ["one", "two"]
 */
 
-_.pluck = function (collection, key) {
-    return _.map(collection, function (array) {
-        return array[key];
-    })
+// _.pluck = function (arrayOfObjects, property) {
+//    return _.map(arrayOfObjects, obj => obj[property]);
+// }
+_.pluck = function (array, test) {
+    var Maparray = [];
+
+    for (let i = 0; i < array.length; i++) {
+        var j = array[i];
+        var result = test(j, i, array);
+        Maparray.push(result);
+    }
+    return Maparray;
 }
 
 /** _.every
@@ -375,7 +421,23 @@ _.pluck = function (collection, key) {
 *   _.every([2,4,6], function(e){return e % 2 === 0}) -> true
 *   _.every([1,2,3], function(e){return e % 2 === 0}) -> false
 */
+_.every = function (collection, func) {
+    //create a for loop 
+    //create some varibles
+    //use ternary operator to determine if element is true or false instead of if statements
+    //create a if statement and return true if element is true or false if
 
+    for (let i = 0; i < collection.length; i++) {
+        var element = collection[i];
+        var result = func ? func(element, i, collection) : element;
+        // if result is not true return false
+        if (!result) {
+            return false;
+        }
+    }
+    return true;
+
+}
 
 /** _.some
 * Arguments:
@@ -397,6 +459,19 @@ _.pluck = function (collection, key) {
 *   _.some([1,3,5], function(e){return e % 2 === 0}) -> false
 *   _.some([1,2,3], function(e){return e % 2 === 0}) -> true
 */
+_.some = function(collection, func){
+    for (let i = 0; i < collection.length; i++) {
+        const element = collection[i];
+        const result = func ? func(element, i, collection) : element;
+
+        if (result) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 
 
 /** _.reduce
@@ -417,7 +492,27 @@ _.pluck = function (collection, key) {
 * Examples:
 *   _.reduce([1,2,3], function(previousSum, currentValue, currentIndex){ return previousSum + currentValue }, 0) -> 6
 */
+_.reduce = function(array, func, seed){
+    var i = 0;// Initialize i for iterating through the collection
+    var previousResult;// created a varible to hold the result of each iteration
 
+// If no seed is provided,this line uses the first element as seed and starts iterating from the second element
+    if (seed === undefined){
+        seed = array[0];
+        i = 1;
+    }
+        previousResult = seed;// this line of code sets the initial previousResult to the seed value
+
+        // Iterate through the collection starting from the right index
+        for(; i < array.length; i++){
+            var element = array[i]; // Gets the current element from the collection
+            previousResult = func(previousResult, element, i);  // this line Applies the provided function to previousResult, current element, and index
+
+        }
+return previousResult; // this line returns the final result after all iterations
+
+
+}
 
 /** _.extend
 * Arguments:
