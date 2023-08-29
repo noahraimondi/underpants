@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": false,
   "description": "Functional Functions for Fun",
-  "main": "data.js",
+  "main": "underpants.js",
   "directories": {
     "test": "test"
   },

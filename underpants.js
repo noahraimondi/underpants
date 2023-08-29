@@ -371,8 +371,28 @@ _.partition = function (array, func) {
 * Examples:
 *   _.map([1,2,3,4], function(e){return e * 2}) -> [2,4,6,8]
 */
-_.map = function (collection, placeholder) {
-
+_.map = function (collection, func) {
+    //a empty array to store the results
+    var resultArray = [];
+    //checks if the collection is an array
+    if (Array.isArray(collection)) {
+        //iterates through each element of the array
+        for (let i = 0; i < collection.length; i++) {
+            // this line calls the provided function with arguments element, i, and collection
+            var result = func(collection[i], i, collection);
+            // this line pushes the return value of the function call into the result array
+            resultArray.push(result);
+        }
+    } else if (typeof collection === "object") {
+        //this line iterates through each property in the object
+        for (var key in collection) {
+            if (collection.hasOwnProperty(key)) {
+                var result = func(collection[key], key, collection);
+                resultArray.push(result);
+            }
+        }
+    }
+    return resultArray;
 }
 
 
@@ -390,15 +410,12 @@ _.map = function (collection, placeholder) {
 // _.pluck = function (arrayOfObjects, property) {
 //    return _.map(arrayOfObjects, obj => obj[property]);
 // }
-_.pluck = function (array, test) {
-    var Maparray = [];
-
-    for (let i = 0; i < array.length; i++) {
-        var j = array[i];
-        var result = test(j, i, array);
-        Maparray.push(result);
-    }
-    return Maparray;
+_.pluck = function (array, property) {
+    //using _.map to iterate throuh the each obj in the array
+    var resultArray = array.map((obj) => {
+        return obj[property];
+    })
+    return resultArray;
 }
 
 /** _.every
@@ -422,7 +439,7 @@ _.pluck = function (array, test) {
 *   _.every([1,2,3], function(e){return e % 2 === 0}) -> false
 */
 _.every = function (collection, func) {
-    //create a for loop 
+    //create a for loop
     //create some varibles
     //use ternary operator to determine if element is true or false instead of if statements
     //create a if statement and return true if element is true or false if
@@ -459,16 +476,36 @@ _.every = function (collection, func) {
 *   _.some([1,3,5], function(e){return e % 2 === 0}) -> false
 *   _.some([1,2,3], function(e){return e % 2 === 0}) -> true
 */
-_.some = function(collection, func){
-    for (let i = 0; i < collection.length; i++) {
-        const element = collection[i];
-        const result = func ? func(element, i, collection) : element;
+_.some = function (collection, func) {
 
-        if (result) {
-            return true;
+    // checks if the function is not provided
+    if (!func) {
+        //this line iterates through each element in the collection
+        for (const item of collection) {
+            //this line checks if the element is true
+            if (item) {
+                return true;
+            }
+        }
+        return false;
+    }
+    // checks if the collection is an array
+    if (Array.isArray(collection)) {
+        //for loop
+        for (let i = 0; i < collection.length; i++) {
+            if (func(collection[i], i, collection)) {
+                return true;
+            }
+        }
+    } else if (typeof collection === "object") {
+        for (var key in collection) {
+            if (collection.hasOwnProperty(key)) {
+                if (func(collection[key], key, collection)) {
+                    return true;
+                }
+            }
         }
     }
-
     return false;
 }
 
@@ -492,24 +529,24 @@ _.some = function(collection, func){
 * Examples:
 *   _.reduce([1,2,3], function(previousSum, currentValue, currentIndex){ return previousSum + currentValue }, 0) -> 6
 */
-_.reduce = function(array, func, seed){
+_.reduce = function (array, func, seed) {
     var i = 0;// Initialize i for iterating through the collection
     var previousResult;// created a varible to hold the result of each iteration
 
-// If no seed is provided,this line uses the first element as seed and starts iterating from the second element
-    if (seed === undefined){
+    // If no seed is provided,this line uses the first element as seed and starts iterating from the second element
+    if (seed === undefined) {
         seed = array[0];
         i = 1;
     }
-        previousResult = seed;// this line of code sets the initial previousResult to the seed value
+    previousResult = seed;// this line of code sets the initial previousResult to the seed value
 
-        // Iterate through the collection starting from the right index
-        for(; i < array.length; i++){
-            var element = array[i]; // Gets the current element from the collection
-            previousResult = func(previousResult, element, i);  // this line Applies the provided function to previousResult, current element, and index
+    // Iterate through the collection starting from the right index
+    for (; i < array.length; i++) {
+        var element = array[i]; // Gets the current element from the collection
+        previousResult = func(previousResult, element, i);  // this line Applies the provided function to previousResult, current element, and index
 
-        }
-return previousResult; // this line returns the final result after all iterations
+    }
+    return previousResult; // this line returns the final result after all iterations
 
 
 }
@@ -528,6 +565,46 @@ return previousResult; // this line returns the final result after all iteration
 *   _.extend(data, {b:"two"}); -> data now equals {a:"one",b:"two"}
 *   _.extend(data, {a:"two"}); -> data now equals {a:"two"}
 */
+
+_.extend = function (collection, func) {
+    //this line of code checks if function is provided
+    if (!func) {
+        //this line of coded iterates through each element in the collection
+        for (var item of collection) {
+            //this line checks if element is false
+            if (item) {
+                //return false if at least one element is false
+                return false;
+            }
+        }
+        //returns true if all elements are true
+        return true;
+    }
+    //this line checks if colllection is an array
+    if (Array.isArray(collection)) {
+        //iterates through each element of the array
+        for (let i = 0; i < collection.length; i++) {
+            if (!func(collection[i], i, collection)) {
+                return false;
+            }
+        }
+    } else if (typeof collection === "object") {
+        //iterates through each property in the obj
+        for (var key in collection) {
+            //checks if property is directly on the obj
+            if (collection.hasOwnProperty(key)) {
+                //calling the function with the correct arguments
+                if (!func(collection[key], key, collection)) {
+                    return false;
+                }
+            }
+        }
+    }
+    return true;
+
+}
+
+
 
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
